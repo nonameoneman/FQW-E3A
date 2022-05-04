@@ -1,4 +1,4 @@
-#!C:\Users\rusta\Desktop\E3A_v2\venv\Scripts\python.exe
+#!C:\Users\rusta\Desktop\FQW-E3A\venv\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

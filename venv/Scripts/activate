@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\rusta\Desktop\E3A_v2\venv"
+VIRTUAL_ENV="C:\Users\rusta\Desktop\FQW-E3A\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
