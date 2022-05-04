@@ -1,0 +1,93 @@
+{% extends 'base_s.html' %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block logo-link %}
+{% url 'assistant_s' %}
+{% endblock %}
+
+{% block body %}
+                <hr>
+                <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
+                  <div class="row rounded border border-dark border-2 my-2">
+                    <p class="text-primary fw-bold my-2">Общая статистика:</p>
+                    <small class="text-center">
+                      <table class="table table-striped"> <!-- Все стденты -->
+                        <thead>
+                          <tr>
+                            <th scope="col">Дисциплина</th>
+                            <th scope="col">Всего кредитов</th>
+                            <th scope="col">Остаток оплаты</th>
+                            <th scope="col">Доступ к AVN</th>
+                            <th scope="col">Дата открытия доступа</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Какая-то дисциплина</th>
+                            <td>6</td>
+                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
+                            <td>Закрыт</td>
+                            <td>10.10.2022</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Какая-то дисциплина</th>
+                            <td>6</td>
+                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
+                            <td>Закрыт</td>
+                            <td>10.10.2022</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Какая-то дисциплина</th>
+                            <td>6</td>
+                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
+                            <td>Закрыт</td>
+                            <td>10.10.2022</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </small>
+                  </div>
+                  <div class="row rounded border border-dark border-2 my-2">
+                    <p class="text-primary fw-bold my-2">Статистика по предметам:</p>
+                    <small class="text-center">
+                      <table class="table table-striped"> <!-- Все стденты -->
+                        <thead>
+                          <tr>
+                            <th scope="col">Дисциплина</th>
+                            <th scope="col">Всего кредитов</th>
+                            <th scope="col">Остаток оплаты</th>
+                            <th scope="col">Доступ к AVN</th>
+                            <th scope="col">Дата открытия доступа</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Какая-то дисциплина</th>
+                            <td>6</td>
+                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
+                            <td>Закрыт</td>
+                            <td>Закрыт</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Какая-то дисциплина</th>
+                            <td>6</td>
+                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
+                            <td>Закрыт</td>
+                            <td>Закрыт</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Какая-то дисциплина</th>
+                            <td>6</td>
+                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
+                            <td>Закрыт</td>
+                            <td>Закрыт</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </small>
+                  </div>
+                </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'app_users/base-login.html' %}
+
+{% block title %}
+E3A | Авторизация
+{% endblock %}
+
+{% block logo-link %}
+{% url 'login' %}
+{% endblock %}
+
+{% block menu-link %}
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+              <ul class="navbar-nav float-right">
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-file-circle-question"></i> Нужна помощь?</a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-info"></i> Инструкция</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope"></i> Обратная связь</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-question"></i> О проекте</a></li>
+                    <li><hr class="m-0 p-0"></li>
+                    <li><a class="dropdown-item" href="/admin"><i class="fa-solid fa-gear"></i></i> Админ-Панель</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+{% endblock %}
+
+{% block body %}
+                <hr>
+                <div class="container-lg m-auto p-auto">
+                    <div class="row align-items-center g-lg-5 py-5">
+                        <hr>
+                        <div class="col-md-10 mx-auto col-lg-5 text-center text-lg-start">
+                            <h1 class="display-4 fw-bold lh-1 mb-3 text-light">Вход в систему E3A</h1>
+                            <p class="col-lg-10 fs-4 text-light">E3A - электронный ассистент, готовый помочь Академическим советникам и Студентам в коммуникации друг с другом.</p>
+                            <p class="col-lg-10 fs-4 text-light">Кредиты, баллы, успеваемость, новости - все в одном месте.</p>
+                        </div>
+                        <div class="col-md-10 mx-auto col-lg-5">
+                            <form class="p-4 p-md-5 border rounded-3 bg-light">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control border-primary" id="floatingInput" placeholder="name@example.com">
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control border-primary" id="floatingPassword" placeholder="Password">
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" value="remember-me"> Запомнить
+                                    </label>
+                                </div>
+                                <a href="#">
+                                    <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Войти</button>
+                                </a>
+                                <hr class="my-4">
+                                <small class="text-muted">Нажимая кнопку "Войти", вы соглашаетесь с правилами использования системы, и подтверждаете что готовы делиться персональными данными.</small>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}

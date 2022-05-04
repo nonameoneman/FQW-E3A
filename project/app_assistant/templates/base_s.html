@@ -1,0 +1,70 @@
+{% load static %}
+{% load pwa %}
+<!doctype html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% progressive_web_app_meta %}
+    <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>E3A | {% block title %}{% endblock %}</title>
+</head>
+    <body class="bg-dark">
+      <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light" aria-label="Main navigation">
+        <div class="container-lg">
+          <a class="navbar-brand fs-3 fw-bold text-primary" href="{% block logo-link %}{% endblock %}">E3A</a>
+          <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>          
+          <div class="navbar-collapse offcanvas-collapse bg-light text-right" id="navbarSideCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'assistant_s' %}"><i class="fa-solid fa-house-chimney"></i> Главная</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'news_s' %}"><i class="fa-regular fa-newspaper"></i> Новостная лента</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-regular fa-bell"></i> Личные уведомления</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-regular fa-calendar-check"></i> Календарь событий</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-solid fa-chart-line"></i> Регистрационный расчет</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav float-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-circle-user"></i> Имя Фамилия</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                  <li><a class="dropdown-item" href="#"><i class="fa-regular fa-address-card"></i> Личный кабинет</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square"></i> Дополнить данные</a></li>
+                  <li><hr class="m-0 p-0"></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa fa-arrow-right-from-bracket"></i> Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      {% block body %}{% endblock %}
+      <footer class="py-3 my-4">
+        <hr class="bg-secondary">
+        <p class="text-center text-muted">
+          <a class="text-center text-muted" href="https://kstu.kg">КГТУ им. И. Раззакова</a>
+        </p>
+        <p class="text-center text-muted">
+          <a class="text-center text-muted" href="https://kstu.kg/fakultety/fakultet-informacionnykh-tekhnologii">ФИТ / ИВТ</a>
+        </p>
+        <p class="text-center text-muted">
+          <a href="mailto:rustam.bayakeev@gmail.com"><i class="text-center text-muted fa-regular fa-envelope"></a></i>
+          Баякеев Рустам Исламбекович ИВТ-1-18
+        </p>
+      </footer>
+      <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+      <script src="{% static 'js/offcanvas.js' %}"></script>
+  </body>
+</html>
