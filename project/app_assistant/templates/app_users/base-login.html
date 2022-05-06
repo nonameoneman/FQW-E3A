@@ -9,7 +9,7 @@
     <link rel="manifest" href="{% static 'manifest.webmanifest' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <title>{% block title %}{% endblock %}</title>
+    <title>E3A | {% block title %}{% endblock %}</title>
 </head>
     <body class="bg-dark">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +18,29 @@
                 <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-                {% block menu-link %} {% endblock %}
+                <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'assistant_a' %}"><i class="fa-solid fa-house-chimney"></i> Вход</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'assistant_a' %}"><i class="fa-solid fa-house-chimney"></i> Регистрация</a>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav float-right">
+                      <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-file-circle-question"></i> Нужна помощь?</a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-info"></i> Инструкция</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope"></i> Обратная связь</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-question"></i> О проекте</a></li>
+                        <li><hr class="m-0 p-0"></li>
+                        <li><a class="dropdown-item" href="/admin"><i class="fa-solid fa-gear"></i></i> Админ-Панель</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </nav>
           {% block body %}{% endblock %}

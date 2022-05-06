@@ -1,29 +1,11 @@
 {% extends 'app_users/base-login.html' %}
 
 {% block title %}
-E3A | Авторизация
+{{title}}
 {% endblock %}
 
 {% block logo-link %}
 {% url 'login' %}
-{% endblock %}
-
-{% block menu-link %}
-            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-              <ul class="navbar-nav float-right">
-                  <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-file-circle-question"></i> Нужна помощь?</a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-info"></i> Инструкция</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope"></i> Обратная связь</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-question"></i> О проекте</a></li>
-                    <li><hr class="m-0 p-0"></li>
-                    <li><a class="dropdown-item" href="/admin"><i class="fa-solid fa-gear"></i></i> Админ-Панель</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
 {% endblock %}
 
 {% block body %}

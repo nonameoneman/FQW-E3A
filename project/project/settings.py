@@ -88,7 +88,6 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'app_users.User' # переопределяю модель пользователя
 
 
-
 LANGUAGE_CODE = 'ru' # определяю язык проекта
 
 TIME_ZONE = 'UTC' # определяю время проекта

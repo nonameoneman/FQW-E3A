@@ -39,12 +39,12 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_('Почта'), unique=True)
-    phone_number = models.IntegerField(_('Номер телефона'), unique=True)
-    full_name = models.CharField(_('ФИО'), max_length=250)
+    email = models.EmailField(_('Почта'), max_length=125, unique=True)
+    phone_number = models.CharField(_('Номер телефона'), max_length=13, unique=True)
+    full_name = models.CharField(_('ФИО'), max_length=125)
 #   profile_photo = models.ImageField(_('Фото профиля'), upload_to='avatars/', null=True, blank=True)
-    user_type = models.IntegerField(_('Тип пользователя'), default=2)
-    is_active = models.BooleanField(_('А'), default=True)
+    is_advisor = models.BooleanField(_('Академический советник'), default=False)
+    is_active = models.BooleanField(_('Профиль активен'), default=True)
     is_staff = models.BooleanField(_('Доступ к админ-панели'), default=False)
 
     USERNAME_FIELD = 'email'
@@ -54,8 +54,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
     def get_short_name(self):
-        return self.email
+        return self.full_name
     def get_full_name(self):
         return self.full_name
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+        ordering = ['is_superuser', 'is_advisor', 'full_name']
