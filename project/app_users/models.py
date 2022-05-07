@@ -53,14 +53,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     def __str__(self):
         return self.email
-    def get_short_name(self):
-        return self.full_name
     def get_full_name(self):
         return self.full_name
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
+    def get_advisor(self):
+        return self.is_advisor
+    def get_staff(self):
+        return self.is_staff
+    def get_active(self):
+        return self.is_active
 
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-        ordering = ['is_superuser', 'is_advisor', 'full_name']
+        ordering = ['-is_superuser', '-is_advisor', 'full_name']
