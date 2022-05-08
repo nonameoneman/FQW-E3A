@@ -1,0 +1,36 @@
+{% extends 'base_s.html' %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block logo-link %}
+{% url 'my_redirect' %}
+{% endblock %}
+
+{% block body %}
+                <hr>
+
+                <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
+                    <div class="row rounded border border-dark border-2 my-2">
+                        <p class="text-primary fw-bold my-2">Мой профиль</p>
+                        <hr>
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">ФИО</th>
+                                    <td>{{ user.full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Электронная почта</th>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Номер телефона</th>
+                                    <td>{{ user.phone_number }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+{% endblock %}

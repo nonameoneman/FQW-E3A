@@ -1,5 +1,6 @@
 {% load static %}
 {% load pwa %}
+
 <!doctype html>
 <html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -22,7 +23,7 @@
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-house-chimney"></i> Страница входа</a>
+                      <a class="nav-link" href="{% url 'my_redirect' %}"><i class="fa-solid fa-house-chimney"></i> Страница перехода</a>
                     </li>
                   </ul>
                   <ul class="navbar-nav float-right">
@@ -38,7 +39,34 @@
                 </div>
               </div>
             </nav>
-          {% block body %}{% endblock %}
+            <hr>
+            <div class="container-lg bg-light rounded g-lg-10 me-auto">
+                <div class="row rounded p-3">
+                    <p class="text-success fw-bold my-2">Страница перенаправления Администратора.</p>
+                    <hr class="my-3">
+                        <p class="fluid text-center fs-1 mt-3"><i class="fa-solid fa-user-gear"></i></p>
+                        <h3 class="fluid text-center fw-bold mb-3">
+                            {{ user.full_name }}
+                        </h3>
+                        <h3 class="fluid text-center">
+                            Вы вошли как Администратор Электронного Ассистента. 
+                        </h3>
+                        <h3 class="fluid text-center">
+                            Пожалуйста выберите действие. 
+                        </h3>
+                        <p class="fluid text-center mt-3">
+                            <a class="btn btn-outline-success btn-lg" href="/admin" role="button">Продолжить</a>
+                        </p>
+                        <p class="fluid text-center mb-3">
+                            <a class="btn btn-outline-danger btn-lg" href="{% url 'logout' %}" role="button">Выход</a>
+                        </p>
+                        <hr class="my-3">
+                        <small class="text-muted text-center">
+                            К сожалению, Администратору Электронного Ассистента, не доступен пользовательский интерфейс.
+                        </small>
+                    </table>
+                </div>
+            </div>
           <footer class="py-3 my-4">
               <hr class="bg-secondary">
               <p class="text-center text-muted">
@@ -52,7 +80,7 @@
                   Баякеев Рустам Исламбекович ИВТ-1-18
               </p>
           </footer>
-        <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
-        <script src="{% static 'js/offcanvas.js' %}"></script>
+          <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+          <script src="{% static 'js/offcanvas.js' %}"></script>
     </body>
 </html>

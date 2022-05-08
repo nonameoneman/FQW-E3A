@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <title>E3A | {% block title %}{% endblock %}</title>
+    <title>E3A | 404</title>
 </head>
     <body class="bg-dark">
       {% if user.is_authenticated %}
@@ -25,29 +25,32 @@
                 <a class="nav-link" href="{% url 'my_redirect' %}"><i class="fa-solid fa-house-chimney"></i> Главная</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'news_s' %}"><i class="fa-regular fa-newspaper"></i> Новостная лента</a>
+                <a class="nav-link " href="{% url 'news_a' %}"><i class="fa fa-thumbtack"></i> Управление новостями</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-regular fa-bell"></i> Личные уведомления</a>
+                <a class="nav-link" href="#"><i class="fa-regular fa-calendar-plus"></i> Управление событиями</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-regular fa-calendar-check"></i> Календарь событий</a>
+                <a class="nav-link" href="#"><i class="fa-solid fa-clock-rotate-left"></i> История уведомлений</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-chart-line"></i> Регистрационный расчет</a>
+                <form class="d-flex px-1">
+                  <input class="form-control me-2 border-primary" type="search" placeholder="Поиск студента">
+                  <button class="btn btn-outline-primary" type="submit">Поиск</button>
+                </form>
               </li>
             </ul>
             <ul class="navbar-nav float-right">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-circle-user"></i> {{ user.full_name }}</a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                  <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fa-regular fa-address-card"></i> Личный кабинет</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square"></i> Дополнить данные</a></li>
-                  <li><hr class="m-0 p-0"></li>
-                  <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-arrow-right-from-bracket"></i> Выйти</a></li>
-                </ul>
-              </li>
-            </ul>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-regular fa-circle-user"></i> {{ user.full_name }}</a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-address-card"></i> Личный кабинет</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square"></i> Дополнить данные</a></li>
+                    <li><hr class="m-0 p-0"></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-arrow-right-from-bracket"></i> Выйти</a></li>
+                  </ul>
+                </li>
+              </ul>
           </div>
         </div>
       </nav>
