@@ -1,11 +1,14 @@
-from turtle import title
-from urllib import request
 from django.shortcuts import render, redirect
 from app_assistant import urls
 
-def loginPage(request):
-        if request.user.is_active == False:
+
+def login(request):
+        if request.user.is_authenticated == False:
                 return render(request, 'registration/login.html', {'title':'Страница входа'})
+        elif request.user.is_staff == True:
+                return render(request, 'app_users/admin.redirect.html', {'title':'Переход в панель администратора'})
+        elif request.user.is_advisor == True:
+                return render(request, 'app_assistant/assistant_a.html', {'title':'Ассистент академического советника'})
         else:
-                return render(request, 'my_redirect')
-        edif
+                return render(request, 'app_assistant/assistant_s.html', {'title':'Ассистент студента'})
+        endif

@@ -11,79 +11,76 @@
 {% block body %}
                 <hr>
                 <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
-                  <div class="row rounded border border-dark border-2 my-2">
-                    <p class="text-primary fw-bold my-2">Общая статистика:</p>
-                    <small class="text-center">
-                      <table class="table table-striped"> <!-- Все стденты -->
-                        <thead>
-                          <tr>
-                            <th scope="col">Дисциплина</th>
-                            <th scope="col">Всего кредитов</th>
-                            <th scope="col">Остаток оплаты</th>
-                            <th scope="col">Доступ к AVN</th>
-                            <th scope="col">Дата открытия доступа</th>
-                          </tr>
-                        </thead>
+                  <p class="text-primary fw-bold my-2">Общая статистика:</p>
+                  <div class="row p-3">
+                      <table class="table"> <!-- Все стденты -->
                         <tbody>
                           <tr>
-                            <th scope="row">Какая-то дисциплина</th>
-                            <td>6</td>
-                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
-                            <td>Закрыт</td>
-                            <td>10.10.2022</td>
+                            <th>ФИО :</th>
+                            <td> {{ user.full_name }} </td>
                           </tr>
                           <tr>
-                            <th scope="row">Какая-то дисциплина</th>
-                            <td>6</td>
-                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
-                            <td>Закрыт</td>
-                            <td>10.10.2022</td>
+                            <th>Группа :</th>
+                            <td>  ИВТ-1-18  </td>
                           </tr>
                           <tr>
-                            <th scope="row">Какая-то дисциплина</th>
-                            <td>6</td>
-                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
-                            <td>Закрыт</td>
-                            <td>10.10.2022</td>
+                            <th>Курс :</th>
+                            <td>  4  </td>
+                          </tr>
+                          <tr>
+                            <th>Оплата :</th>
+                            <td><span class="text-secondary">9843</span>⊆ / <span class="text-success">42800</span>⊆</td>
+                          </tr>
+                          <tr>
+                            <th>Кредиты за курс :</th>
+                            <td><span class="text-secondary">29</span> / <span class="text-success">30</span></td>
+                          </tr>
+                          <tr>
+                            <th>Кредиты всего :</th>
+                            <td><span class="text-secondary">89</span> / <span class="text-success">120</span></td>
+                          </tr>
+                          <tr>
+                            <th>Задолженности :</th>
+                            <td> 1 </td>
                           </tr>
                         </tbody>
                       </table>
-                    </small>
                   </div>
-                  <div class="row rounded border border-dark border-2 my-2">
+                  <hr class="my-4">
+                  <div class="row my-2">
                     <p class="text-primary fw-bold my-2">Статистика по предметам:</p>
                     <small class="text-center">
-                      <table class="table table-striped"> <!-- Все стденты -->
+                      <table class="table table-striped table-bordered"> <!-- Все стденты -->
                         <thead>
                           <tr>
                             <th scope="col">Дисциплина</th>
+                            <th scope="col">Форма контроля</th>
                             <th scope="col">Всего кредитов</th>
-                            <th scope="col">Остаток оплаты</th>
-                            <th scope="col">Доступ к AVN</th>
-                            <th scope="col">Дата открытия доступа</th>
+                            <th scope="col">Баллы</th>
+                            <th scope="col">Период регистрации</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <th scope="row">Какая-то дисциплина</th>
+                            <th scope="row">Дисциплина 1</th>
+                            <td>Экзамен</td>
                             <td>6</td>
-                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
-                            <td>Закрыт</td>
-                            <td>Закрыт</td>
+                            <td>35</td>
+                            <td>2021 - 2022</td>
                           </tr>
                           <tr>
-                            <th scope="row">Какая-то дисциплина</th>
-                            <td>6</td>
-                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
-                            <td>Закрыт</td>
-                            <td>Закрыт</td>
+                            <th scope="row">Дисциплина 2</th>
+                            <td>Курс/Раб</td>
+                            <td>1</td>
+                            <td>10</td>
+                            <td>2021 - 2022</td>
                           </tr>
                           <tr>
-                            <th scope="row">Какая-то дисциплина</th>
-                            <td>6</td>
-                            <td><i class="fa-solid fa-triangle-exclamation text-danger"></i> 3</td>
-                            <td>Закрыт</td>
-                            <td>Закрыт</td>
+                            <th scope="row">Дисциплина 3</th>
+                            <td>Зачет</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>2020 - 2021 <i class="fa-solid fa-triangle-exclamation text-danger"></i></td>
                           </tr>
                         </tbody>
                       </table>

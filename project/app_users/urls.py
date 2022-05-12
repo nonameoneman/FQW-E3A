@@ -6,6 +6,6 @@ from app_users import views
 
 
 urlpatterns = [
-        path('login2/', views.loginPage, name='loginPage'),
+        path('', views.login, name='login'),
         path('', include('django.contrib.auth.urls')),
 ]
