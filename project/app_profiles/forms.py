@@ -9,3 +9,8 @@ class CustomChangeForm(UserChangeForm):
         model = User
         fields = ('email', 'phone_number')
         
+class AdvisorChangeForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('email', 'phone_number')
+        

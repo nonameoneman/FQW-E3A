@@ -1,3 +1,5 @@
+from audioop import reverse
+from turtle import position
 from django.contrib.auth.base_user import BaseUserManager
 
 class UserManager(BaseUserManager):
@@ -52,9 +54,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
     def __str__(self):
-        return self.email
-    def get_full_name(self):
         return self.full_name
+    def get_email(self):
+        return self.email
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
     def get_advisor(self):
@@ -63,8 +65,53 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.is_staff
     def get_active(self):
         return self.is_active
+    def get_phone(self):
+        return self.phone_number
 
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
         ordering = ['-is_superuser', '-is_advisor', 'full_name']
+        
+class Advisor(models.Model):
+    position = models.CharField(_("Должность"), max_length=50, null=True)
+    user = models.ForeignKey("User", verbose_name=_("ID Пользователя"), on_delete=models.PROTECT, null=True)
+    
+    def get_control(self):
+        return self.id
+    def get_position(self):
+        return self.position
+    def get_absolute_url(self):
+        return reverse("advisor", kwargs={"pk": self.pk})
+    
+    @property
+    def name(self):
+        return self.user.full_name
+    name.fget.short_description = 'ФИО'
+    @property
+    def email(self):
+        return self.user.phone_number
+    email.fget.short_description = 'Email'
+    @property
+    def phone(self):
+        return self.user.phone_number
+    phone.fget.short_description = 'Номер телефона'
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Советник'
+        verbose_name_plural = 'Советники'
+        ordering = ['id',]
+        
+class Groups(models.Model):
+    name = models.CharField(_("Наименование группы"), max_length=25)
+    advisor = models.ForeignKey("Advisor", verbose_name=_("Советник"), on_delete=models.PROTECT, null=True)
+    cours = models.IntegerField(_("Курс"), null=True)
+    
+    class Meta:
+        verbose_name = 'Группа'
+        verbose_name_plural = 'Группы'
+        ordering = ['cours', '-name']
+        

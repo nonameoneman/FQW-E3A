@@ -1,5 +1,7 @@
+from multiprocessing import context
+from turtle import title
 from django.shortcuts import render, redirect
-from app_assistant import urls
+from app_users.models import User, Advisor
 
 
 def login(request):

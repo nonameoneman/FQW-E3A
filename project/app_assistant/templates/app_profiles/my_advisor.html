@@ -1,0 +1,21 @@
+{% extends 'base_s.html' %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block logo-link %}
+{% url 'my_redirect' %}
+{% endblock %}
+
+{% block body %}
+                <hr>
+                <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
+                  <p class="text-primary fw-bold my-2">Мой академический советник</p>
+                  <hr class="my-4">
+                  {% for a in dop %}
+                      <p>{{a.name}}, {{a.email}}, {{a.phone}}, {{a.user_id}}, {{a.position}}</p>
+                  {% endfor %}
+                  <hr class="my-4">
+                </div>
+{% endblock %}

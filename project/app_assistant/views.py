@@ -1,7 +1,6 @@
 from wsgiref.util import request_uri
 from django.shortcuts import render
-from django.contrib.admin import views
-from app_assistant import views
+  
   
 def my_redirect(request):
     if request.user.is_advisor == True:
