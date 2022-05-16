@@ -109,9 +109,24 @@ class Groups(models.Model):
     name = models.CharField(_("Наименование группы"), max_length=25)
     advisor = models.ForeignKey("Advisor", verbose_name=_("Советник"), on_delete=models.PROTECT, null=True)
     cours = models.IntegerField(_("Курс"), null=True)
+    credit_price = models.IntegerField(_("Стоимость кредита"), null=True)
+    form_of_e = models.ForeignKey("Form_e", verbose_name=_("Форма обучения"), on_delete=models.PROTECT, null=True)
+    @property
+    def form_e(self):
+        return self.form_of_e.name
+    form_e.fget.short_description = 'Форма обучения'
     
     class Meta:
         verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
         ordering = ['cours', '-name']
+        
+class Form_e(models.Model):
+    name = models.CharField(_("Форма обучения"), max_length=25, null=True)
+    
+    class Meta:
+        verbose_name = 'Форма обучения'
+        verbose_name_plural = 'Формы обучения'
+        ordering = ['-name',]
+    
         
