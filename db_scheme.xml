@@ -114,7 +114,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1101" y="401" name="discipline">
+<table x="1201" y="201" name="discipline">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -137,7 +137,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1301" y="401" name="discipline_reg">
+<table x="1201" y="401" name="discipline_reg">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -157,7 +157,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1101" y="601" name="event_calendar">
+<table x="1001" y="101" name="event_calendar">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -183,7 +183,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1601" y="401" name="notofications">
+<table x="1501" y="501" name="notofications">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -203,7 +203,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="701" y="601" name="news">
+<table x="1501" y="301" name="news">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -218,6 +218,17 @@
 <default>NULL</default></row>
 <row name="control_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="701" y="301" name="form_e">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>CHAR</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>

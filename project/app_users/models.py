@@ -90,7 +90,7 @@ class Advisor(models.Model):
     name.fget.short_description = 'ФИО'
     @property
     def email(self):
-        return self.user.phone_number
+        return self.user.email
     email.fget.short_description = 'Email'
     @property
     def phone(self):
@@ -105,28 +105,77 @@ class Advisor(models.Model):
         verbose_name_plural = 'Советники'
         ordering = ['id',]
         
+class Form_e(models.Model):
+    name = models.CharField(_("Форма обучения"), max_length=25, null=True)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Форма обучения'
+        verbose_name_plural = 'Формы обучения'
+        ordering = ['-name',]        
+
 class Groups(models.Model):
     name = models.CharField(_("Наименование группы"), max_length=25)
     advisor = models.ForeignKey("Advisor", verbose_name=_("Советник"), on_delete=models.PROTECT, null=True)
     cours = models.IntegerField(_("Курс"), null=True)
     credit_price = models.IntegerField(_("Стоимость кредита"), null=True)
     form_of_e = models.ForeignKey("Form_e", verbose_name=_("Форма обучения"), on_delete=models.PROTECT, null=True)
-    @property
-    def form_e(self):
-        return self.form_of_e.name
-    form_e.fget.short_description = 'Форма обучения'
+    
+    def __str__(self):
+        return self.name
     
     class Meta:
         verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
-        ordering = ['cours', '-name']
-        
-class Form_e(models.Model):
-    name = models.CharField(_("Форма обучения"), max_length=25, null=True)
+        ordering = ['-cours', '-name']
+
+class Student(models.Model):
+    cipher = models.CharField(_("Шифр студента"), max_length=25, unique=True)
+    user = models.ForeignKey("User", verbose_name=_("Студент"), on_delete=models.PROTECT, null=True)
+    groups = models.ForeignKey("Groups", verbose_name=_("Группа"), on_delete=models.PROTECT, null=True)
+    
+    def __str__(self):
+        return self.cipher
+    
+    def get_student(self):
+        return self.id
+    
+    @property
+    def u_id(self):
+        return self.user.id
+    u_id.fget.short_description = 'ID Пользователя'
+    @property
+    def name(self):
+        return self.user.full_name
+    name.fget.short_description = 'ФИО'
+    @property
+    def course(self):
+        return self.groups.cours
+    course.fget.short_description = 'Курс'
+    @property
+    def email(self):
+        return self.user.email
+    email.fget.short_description = 'Email'
+    @property
+    def phone(self):
+        return self.user.phone_number
+    phone.fget.short_description = 'Номер телефона'
+    @property
+    def advisor(self):
+        return self.groups.advisor
+    advisor.fget.short_description = 'Академ советник'
+    @property
+    def credit_price(self):
+        return self.groups.credit_price
+    credit_price.fget.short_description = 'Стоимость кредита'
+    @property
+    def form_of_e(self):
+        return self.groups.form_of_e
+    form_of_e.fget.short_description = 'Форма обучения'
     
     class Meta:
-        verbose_name = 'Форма обучения'
-        verbose_name_plural = 'Формы обучения'
-        ordering = ['-name',]
-    
-        
+        verbose_name = 'Студент'
+        verbose_name_plural = 'Студенты'
+        ordering = ['-cipher', '-id']
