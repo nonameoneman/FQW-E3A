@@ -18,7 +18,7 @@ class EditProfileView(generic.UpdateView):
     
     def get_object(self):
         return self.request.user
-    
+
 def my_advisor(request):
         advisor = Advisor.objects.all()
         user = User.objects.all()

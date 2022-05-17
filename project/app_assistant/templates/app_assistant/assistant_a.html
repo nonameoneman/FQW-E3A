@@ -14,68 +14,51 @@
                   <div class="row my-2">
                     <p class="text-primary fw-bold my-2">Мои группы: </p>
                     <small class="text-center">
-                      <table class="table table-striped table-bordered border-dark"> <!-- Мои группы -->
+                      <table class="table table-striped table-bordered border-dark rounded"> <!-- Мои группы -->
                         <thead>
                           <tr>
                             <th scope="col">Группа</th>
+                            <th scope="col">Курс</th>
                             <th scope="col">Форма обучения</th>
-                            <th scope="col">Форма оплаты</th>
-                            <th scope="col">Всего студентов</th>
-                            <th scope="col">Студенты с проблемой</th>
+                            <th scope="col">Стоимость кредита</th>
+                            <th scope="col">Студенты</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">ИВТ-1-18</th>
-                            <td>Очная</td>
-                            <td>Контракт</td>
-                            <td>24</td>
-                            <td class="dropdown">
-                              <button class="btn btn-sm btn-mute dropdown-toggle" type="button" id="group_id" data-bs-toggle="dropdown" aria-expanded="false">
-                                4
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="group_id">
-                                <li><a class="dropdown-item" href="#">student 1</a></li>
-                                <li><a class="dropdown-item" href="#">student 2</a></li>
-                                <li><a class="dropdown-item" href="#">student 3</a></li>
-                                <li><a class="dropdown-item" href="#">student 4</a></li>
-                              </ul>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">ИВТ-1-18</th>
-                            <td>Очная</td>
-                            <td>Контракт</td>
-                            <td>24</td>
-                            <td class="dropdown">
-                              <button class="btn btn-sm btn-mute dropdown-toggle" type="button" id="group_id" data-bs-toggle="dropdown" aria-expanded="false">
-                                4
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="group_id">
-                                <li><a class="dropdown-item" href="#">student 1</a></li>
-                                <li><a class="dropdown-item" href="#">student 2</a></li>
-                                <li><a class="dropdown-item" href="#">student 3</a></li>
-                                <li><a class="dropdown-item" href="#">student 4</a></li>
-                              </ul>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">ИВТ-1-18</th>
-                            <td>Очная</td>
-                            <td>Контракт</td>
-                            <td>24</td>
-                            <td class="dropdown">
-                              <button class="btn btn-sm btn-mute dropdown-toggle" type="button" id="group_id" data-bs-toggle="dropdown" aria-expanded="false">
-                                4
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="group_id">
-                                <li><a class="dropdown-item" href="#">student 1</a></li>
-                                <li><a class="dropdown-item" href="#">student 2</a></li>
-                                <li><a class="dropdown-item" href="#">student 3</a></li>
-                                <li><a class="dropdown-item" href="#">student 4</a></li>
-                              </ul>
-                            </td>
-                          </tr>
+                        {% for a in advisor %}
+                          {% if user.id == a.user_id %}
+            
+                            {% for g in groups %}
+                              {% if a.pk == g.advisor_id %}
+                                  <tr>
+                                    <th scope="row">{{ g.name }}</th>
+                                    <td>{{ g.cours }}</td>
+                                    <td>{{ g.form_of_e }}</td>
+
+                                    {% if g.credit_price == 0 %}
+                                      <td class="text-success">Бюджет</td>
+                                    {% else %}
+                                      <td>{{ g.credit_price }} <u>c</u></td>
+                                    {% endif %}
+
+                                    <td class="dropdown">
+                                      <button class="btn btn-sm btn-mute dropdown-toggle" type="button" id="asd" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Открыть список
+                                      </button>
+                                      <ul class="dropdown-menu" aria-labelledby="asd">
+                                        {% for s in student %}
+                                          {% if s.groups_id == g.id %}
+                                            <li><a class="dropdown-item" href="#">{{ s.name }}</a></li>
+                                          {% endif %}
+                                        {% endfor %}
+                                      </ul>
+                                    </td>
+                                  </tr>
+                              {% endif %}
+                            {% endfor %}
+                            
+                          {% endif %}
+                        {% endfor %}
                         </tbody>
                       </table>
                     </small>
@@ -83,6 +66,7 @@
                   <hr class="my-4">
                   <div class="row my-2">
                     <p class="text-primary fw-bold my-2">Мои студенты:</p>
+                    <br class="m-2">
                     <small class="text-center">
                       <table class="table table-striped table-bordered border-dark"> <!-- Все стденты -->
                         <thead>
@@ -94,23 +78,28 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> 18/123456</th>
-                            <td>Студентов Студент Студентович, ИВТ-1-18</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
-                          </tr>
-                          <tr>
-                            <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> 18/123456</th>
-                            <td>Студентов Студент Студентович, ИВТ-1-18</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
-                          </tr><tr>
-                            <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> 18/123456</th>
-                            <td>Студентов Студент Студентович, ИВТ-1-18</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
-                          </tr>
+                          {% for a in advisor %}
+                            {% if user.id == a.user_id %}
+            
+                              {% for g in groups %}
+                                {% if a.pk == g.advisor_id %}
+
+                                  {% for s in student %}
+                                    {% if s.groups_id == g.id %}
+                                    <tr>
+                                      <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> {{ s.cipher }} </th>
+                                      <td>{{ s.name }}, {{ g.name }}</td>
+                                      <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
+                                      <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
+                                    </tr>
+                                    {% endif %}
+                                  {% endfor %}
+
+                                {% endif %}
+                              {% endfor %}
+
+                            {% endif %}
+                          {% endfor %}
                         </tbody>
                       </table>
                     </small>
