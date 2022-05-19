@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="201" y="401" name="user">
+</datatypes><table x="201" y="601" name="user">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -61,7 +61,7 @@
 </key>
 <comment>Пользователи</comment>
 </table>
-<table x="901" y="401" name="student">
+<table x="901" y="601" name="student">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -80,9 +80,13 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
+<key type="INDEX" name="">
+<part>user_id</part>
+<part>group_id</part>
+</key>
 <comment>Студенты</comment>
 </table>
-<table x="501" y="402" name="advisor">
+<table x="501" y="602" name="advisor">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -95,9 +99,12 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
 <comment>Академические советники</comment>
 </table>
-<table x="701" y="401" name="group">
+<table x="701" y="601" name="group">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -110,19 +117,23 @@
 <row name="cours" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="form_of_e" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
+<key type="INDEX" name="">
+<part>form_of_e</part>
+<part>advisor_id</part>
+</key>
 </table>
-<table x="1201" y="201" name="discipline">
+<table x="1201" y="301" name="discipline">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
-<default>NULL</default></row>
-<row name="faculty_name" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="credits" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -133,21 +144,36 @@
 <row name="form_control" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="short_name" null="1" autoincrement="0">
+<datatype>CHAR</datatype>
+<default>NULL</default></row>
+<row name="fh" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="sh" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="xtr" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
+<key type="INDEX" name="">
+<part>form_control</part>
+</key>
 </table>
-<table x="1201" y="401" name="discipline_reg">
+<table x="1201" y="601" name="discipline_reg">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="student_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="descipline_id" null="1" autoincrement="0">
+<row name="discipline_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="date_of_registration" null="1" autoincrement="0">
+<row name="date_of_reg" null="1" autoincrement="0">
 <datatype>DATE</datatype>
 <default>NULL</default></row>
 <row name="course" null="1" autoincrement="0">
@@ -157,7 +183,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1001" y="101" name="event_calendar">
+<table x="1501" y="151" name="event_calendar">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -183,7 +209,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1501" y="501" name="notofications">
+<table x="1401" y="601" name="notofications">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -203,7 +229,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1501" y="301" name="news">
+<table x="1501" y="401" name="news">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -223,11 +249,90 @@
 <part>id</part>
 </key>
 </table>
-<table x="701" y="301" name="form_e">
+<table x="651" y="451" name="form_e">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
+<datatype>CHAR</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1001" y="51" name="ac_years">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>CHAR</datatype>
+<default>NULL</default></row>
+<row name="m1_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="m1_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="m2_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="m2_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="fx1_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="fx1_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="i1_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="i1_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="m3_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="m3_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="m4_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="m4_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="fx2_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="fx2_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="i2_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="i2_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="year_s" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<row name="year_e" null="1" autoincrement="0">
+<datatype>DATE</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1201" y="101" name="form_controls">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>CHAR</datatype>
+<default>NULL</default></row>
+<row name="short_name" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">

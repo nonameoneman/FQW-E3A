@@ -31,7 +31,9 @@
                                   </tr>
                                   <tr>
                                     <th>Советник :</th>
-                                    <td>{{ s.advisor }}</td>
+                                    <td>
+                                      {{ s.advisor }}
+                                    </td>
                                   </tr>
                                   <tr>
                                     <th>Оплата :</th>
@@ -43,7 +45,17 @@
                                   </tr>
                                   <tr>
                                     <th>Кредиты всего :</th>
-                                    <td><span class="text-secondary">89</span> / <span class="text-success">120</span></td>
+                                    <td> 
+                                    {% for dr in dis_reg %}  
+                                    {% if dr.student_id == s.id %}
+                                    
+                                            <span class="text-secondary">
+                                              {{ dr.credits }}
+                                            </span> 
+                                            
+                                    {% endif %}
+                                    {% endfor %}
+                                    / <span class="text-success">120</span></td>
                                   </tr>
                                   <tr>
                                     <th>Задолженности :</th>

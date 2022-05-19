@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'app_profiles.apps.AppProfilesConfig', # приложение профиля
     'app_assistant.apps.AppAssistantConfig', # приложение ассистента
     'app_news.apps.AppNewsConfig', # приложение новостей
+    'app_calendars.apps.AppCalendarsConfig', # приложение календарей
+    'app_disciplines.apps.AppDisciplinesConfig', # приложение дисциплин
 ]
 
 MIDDLEWARE = [
@@ -93,7 +95,7 @@ LOGIN_REDIRECT_URL = 'my_redirect'
 LOGOUT_REDIRECT_URL = 'login'
 
 LANGUAGE_CODE = 'ru' # определяю язык проекта
-TIME_ZONE = 'UTC' # определяю время проекта
+TIME_ZONE = 'Asia/Bishkek' # определяю время проекта
 
 USE_I18N = True
 

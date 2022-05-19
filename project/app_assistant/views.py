@@ -1,6 +1,8 @@
 from wsgiref.util import request_uri
 from django.shortcuts import render
 from app_users.models import User, Advisor, Groups, Student
+from app_calendars.models import Ac_years
+from app_disciplines.models import Disciplines, Discipline_reg
     
 def my_redirect(request):
     if request.user.is_advisor == True:
@@ -27,12 +29,18 @@ def my_redirect(request):
         groups = Groups.objects.all()
         student = Student.objects.all()
         advisor = Advisor.objects.all()
+        discipline = Disciplines.objects.all()
+        dis_reg = Discipline_reg.objects.all()
+        years = Ac_years.objects.all()
         
         context = {
             'users': user,
             'advisor': advisor,
             'groups': groups,
             'student': student,
+            'discipline': discipline,
+            'dis_reg': dis_reg,
+            'years': years,
             'title': 'Ассистент Студентаа',
         }
         

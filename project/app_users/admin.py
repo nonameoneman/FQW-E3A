@@ -1,7 +1,6 @@
-from msilib.schema import Class
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
-
 from app_users.models import User, Advisor, Groups, Form_e, Student
 
 @admin.register(User)
@@ -36,6 +35,7 @@ class AdvisorAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name', 'phone', 'email')
     search_fields = ('name', 'phone', 'email')
     
+admin.site.unregister(Group)
 
 @admin.register(Groups)
 class GroupsAdmin(admin.ModelAdmin):
@@ -44,6 +44,7 @@ class GroupsAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'cours', 'form_of_e', 'credit_price', 'advisor')
     list_display_links = ('id', 'name')
     search_fields = ('id', 'name')
+    list_filter = ('cours', 'form_of_e', 'advisor')
     
 #@admin.register(Form_e)
 #class FormEAdmin(admin.ModelAdmin):
@@ -61,3 +62,4 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ('id', 'cipher', 'name', 'groups', 'course', 'form_of_e', 'advisor')
     list_display_links = ('id', 'name')
     search_fields = ('name', 'phone', 'email')
+    list_filter = ('groups', )

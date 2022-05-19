@@ -69,8 +69,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.phone_number
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = 'Пользователя'
+        verbose_name_plural = '1. Пользователи'
         ordering = ['-is_superuser', '-is_advisor', 'full_name']
         
 class Advisor(models.Model):
@@ -101,8 +101,8 @@ class Advisor(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = 'Советник'
-        verbose_name_plural = 'Советники'
+        verbose_name = 'Советника'
+        verbose_name_plural = '2. Советники'
         ordering = ['id',]
         
 class Form_e(models.Model):
@@ -112,7 +112,7 @@ class Form_e(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = 'Форма обучения'
+        verbose_name = 'Форму обучения'
         verbose_name_plural = 'Формы обучения'
         ordering = ['-name',]        
 
@@ -127,8 +127,8 @@ class Groups(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = 'Группа'
-        verbose_name_plural = 'Группы'
+        verbose_name = 'Группу'
+        verbose_name_plural = '3. Группы'
         ordering = ['-cours', '-name']
 
 class Student(models.Model):
@@ -176,6 +176,6 @@ class Student(models.Model):
     form_of_e.fget.short_description = 'Форма обучения'
     
     class Meta:
-        verbose_name = 'Студент'
-        verbose_name_plural = 'Студенты'
+        verbose_name = 'Студента'
+        verbose_name_plural = '4. Студенты'
         ordering = ['-cipher', '-id']
