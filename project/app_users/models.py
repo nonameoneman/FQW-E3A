@@ -45,7 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(_('Номер телефона'), max_length=13, unique=True)
     full_name = models.CharField(_('ФИО'), max_length=125)
 #   profile_photo = models.ImageField(_('Фото профиля'), upload_to='avatars/', null=True, blank=True)
-    is_advisor = models.BooleanField(_('Академический советник'), default=False)
+    is_advisor = models.BooleanField(_('Cоветник'), default=False)
+    is_teacher = models.BooleanField(_('Преподаватель'), default=False)
     is_active = models.BooleanField(_('Профиль активен'), default=True)
     is_staff = models.BooleanField(_('Доступ к админ-панели'), default=False)
 
@@ -71,7 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'Пользователя'
         verbose_name_plural = '1. Пользователи'
-        ordering = ['-is_superuser', '-is_advisor', 'full_name']
+        ordering = ['-is_superuser', '-is_advisor', '-is_teacher', 'full_name']
         
 class Advisor(models.Model):
     position = models.CharField(_("Должность"), max_length=50, null=True)
