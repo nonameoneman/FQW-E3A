@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-jop*)(k5yx&0us^m5b$#8$fn9j#vw9r3(ss%x=x$&-y)tybe_f
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.1', '192.168.1.100']
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -123,7 +123,7 @@ PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone' 
 PWA_APP_SCOPE = '/' 
 PWA_APP_ORIENTATION = 'portrait' 
-PWA_APP_START_URL = '/login/' 
+PWA_APP_START_URL = '/' 
 PWA_APP_STATUS_BAR_COLOR = 'default' 
 PWA_APP_ICONS = [ { 'src': '/static/android-chrome-512x512.png', 'sizes': '512x512' } ] 
 PWA_APP_ICONS_APPLE = [ { 'src': '/static/apple-touch-icon.png', 'sizes': '180x180' } ] 

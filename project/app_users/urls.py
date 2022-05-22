@@ -9,6 +9,7 @@ admin.site.site_header = 'Администрирование E3A'
 admin.site.site_title = 'Сайт администрации E3A'
 
 urlpatterns = [
-        path('', views.login, name='login'),
+        path('empty_login/', views.login, name='login'),
         path('', include('django.contrib.auth.urls')),
+        path('', views.empty, name='empty'),
 ]

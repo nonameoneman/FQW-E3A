@@ -1,11 +1,14 @@
 from wsgiref.util import request_uri
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from app_users.models import User, Advisor, Groups, Student
 from app_calendars.models import Ac_years
 from app_disciplines.models import Disciplines, Discipline_reg
     
 def my_redirect(request):
-    if request.user.is_advisor == True:
+    if request.user.is_authenticated == False:
+        return redirect('login/')
+    
+    elif request.user.is_advisor == True:
         user = User.objects.all()
         groups = Groups.objects.all()
         student = Student.objects.all()
@@ -16,10 +19,13 @@ def my_redirect(request):
             'advisor': advisor,
             'groups': groups,
             'student': student,
-            'title': 'Ассистент академического советника',
+            'title': 'Ассистент Советника',
         }
             
         return render(request, 'app_assistant/assistant_a.html', context=context)
+    
+    elif request.user.is_teacher == True:
+        return render(request, 'app_assistant/assistant_t.html', {'title':'Ассистент Преподавателя'})
     
     elif request.user.is_staff == True:
         return render(request, 'admin_redirect.html', {'title':'Администратор'})
