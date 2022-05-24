@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
-from app_users.models import User, Advisor, Groups, Form_e, Student
+from app_users.models import *
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
@@ -30,6 +30,14 @@ class UserAdmin(UserAdmin):
 @admin.register(Advisor)
 class AdvisorAdmin(admin.ModelAdmin):
     model = Advisor
+    
+    list_display = ('id', 'name', 'email', 'phone', 'user_id')
+    list_display_links = ('id', 'name', 'phone', 'email')
+    search_fields = ('name', 'phone', 'email')
+    
+@admin.register(Teacher)
+class TeacherAdmin(admin.ModelAdmin):
+    model = Teacher
     
     list_display = ('id', 'name', 'email', 'phone', 'position', 'user_id')
     list_display_links = ('id', 'name', 'phone', 'email')

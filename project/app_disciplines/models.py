@@ -23,12 +23,18 @@ class Disciplines(models.Model):
     credits = models.IntegerField(("Количество кредитов"), null=True)
     hours = models.IntegerField(("Количество часов"), null=True)
     form_control = models.ForeignKey("Form_controls", verbose_name=("Форма контроля"), on_delete=models.PROTECT)
+    teacher = models.ForeignKey("app_users.Teacher", verbose_name=("Преподаватель"), on_delete=models.PROTECT, null=True)
     fh = models.BooleanField(("Первое полугодие"), null=True)
     sh = models.BooleanField(("Второе полугодие"), null=True)
     xtr = models.BooleanField(("Дополнительно"), null=True)
     
     def __str__(self):
         return self.name
+    
+    @property
+    def teacher_name(self):
+        return self.teacher.name
+    teacher_name.fget.short_description = 'ФИО Преподавателя'
     
     class Meta:
         verbose_name = 'Дисциплину'
@@ -79,4 +85,3 @@ class Credits_count(models.Model):
         verbose_name = 'Колличество кредитов'
         verbose_name_plural = 'Колличество кредитов'
         ordering = ['dis_reg', ]
-    

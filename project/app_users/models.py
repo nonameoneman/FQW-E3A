@@ -75,13 +75,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         ordering = ['-is_superuser', '-is_advisor', '-is_teacher', 'full_name']
         
 class Advisor(models.Model):
-    position = models.CharField(_("Должность"), max_length=50, null=True)
     user = models.ForeignKey("User", verbose_name=_("ID Пользователя"), on_delete=models.PROTECT, null=True)
     
     def get_control(self):
         return self.id
-    def get_position(self):
-        return self.position
     def get_absolute_url(self):
         return reverse("advisor", kwargs={"pk": self.pk})
     
@@ -129,7 +126,7 @@ class Groups(models.Model):
     
     class Meta:
         verbose_name = 'Группу'
-        verbose_name_plural = '3. Группы'
+        verbose_name_plural = '4. Группы'
         ordering = ['-cours', '-name']
 
 class Student(models.Model):
@@ -178,5 +175,37 @@ class Student(models.Model):
     
     class Meta:
         verbose_name = 'Студента'
-        verbose_name_plural = '4. Студенты'
+        verbose_name_plural = '5. Студенты'
         ordering = ['-cipher', '-id']
+        
+class Teacher(models.Model):
+    position = models.CharField(_("Должность"), max_length=50, null=True)
+    user = models.ForeignKey("User", verbose_name=_("ID Пользователя"), on_delete=models.PROTECT, null=True)
+    
+    def get_control(self):
+        return self.id
+    def get_position(self):
+        return self.position
+    def get_absolute_url(self):
+        return reverse("advisor", kwargs={"pk": self.pk})
+    
+    @property
+    def name(self):
+        return self.user.full_name
+    name.fget.short_description = 'ФИО'
+    @property
+    def email(self):
+        return self.user.email
+    email.fget.short_description = 'Email'
+    @property
+    def phone(self):
+        return self.user.phone_number
+    phone.fget.short_description = 'Номер телефона'
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Преподавателя'
+        verbose_name_plural = '3. Преподаватели'
+        ordering = ['id',]
