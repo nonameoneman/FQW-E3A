@@ -11,4 +11,5 @@ urlpatterns = [
     path('', include("app_profiles.urls")),
     path('', include("app_assistant.urls")),
     path('', include("app_news.urls")),
+    path('', include("app_disciplines.urls")),
 ]

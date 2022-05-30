@@ -1,4 +1,5 @@
 from tabnanny import verbose
+from xmlrpc.client import boolean
 from django.db import models
 from django.forms import CharField
 
@@ -45,6 +46,8 @@ class Discipline_reg(models.Model):
     discipline = models.ForeignKey("Disciplines", verbose_name=("Название дисциплины"), on_delete=models.PROTECT)
     student = models.ForeignKey("app_users.Student", verbose_name=("Шифр студента"), on_delete=models.PROTECT)  
     date_of_reg = models.DateField(("Дата регистрации"), auto_now=False, auto_now_add=True)
+    conf = models.BooleanField(("Подтверждаю"), default=False)
+    abon = models.BooleanField(("Отказываю"), default=False)
     
     @property
     def student_name(self):
