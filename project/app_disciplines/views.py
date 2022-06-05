@@ -1,8 +1,12 @@
+from turtle import end_fill
+from urllib import request
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from app_users.models import *
 from .models import *
 from .forms import *
 
+      
 def dis(request):
     user = User.objects.all()
     groups = Groups.objects.all()
@@ -11,6 +15,11 @@ def dis(request):
     teacher = Teacher.objects.all()
     dis = Disciplines.objects.all()
     dis_reg = Discipline_reg.objects.all()
+    
+    def find_stud():
+        for s in student:
+            if s.user_id == request.user.id:
+                return s.pk
     
     if request.user.is_authenticated == False:
         return redirect('login/')
@@ -45,7 +54,22 @@ def dis(request):
         return redirect('my_redirect')
     
     else:
-        form = DisciplineRegFrom
+        initaial_data = {
+            'student': find_stud,
+            'conf': False,
+            'abon': False,
+        }
+        submitted = False
+        if request.method == "POST":
+            form = DisciplineRegFrom(request.POST, initial=initaial_data)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/disciplines/?submitted=true')
+        else:
+            form = DisciplineRegFrom(initial=initaial_data)
+            if 'submitted' in request.GET:
+                submitted = True
+        
         context = {
             'users': user,
             'advisor': advisor,
@@ -56,5 +80,6 @@ def dis(request):
             'dis_reg': dis_reg,
             'form': form,
             'title': 'Регистрация на предметы',
+            'submitted': submitted
         }   
         return render(request, 'app_disciplines/reg_s.html', context=context)

@@ -25,46 +25,39 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">Дисциплина 1</th>
-                            <td>Экзамен</td>
-                            <td>6</td>
-                            <td>35</td>
-                            <td>2021 - 2022</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Дисциплина 2</th>
-                            <td>Курс/Раб</td>
-                            <td>1</td>
-                            <td>10</td>
-                            <td>2021 - 2022</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Дисциплина 3</th>
-                            <td>Зачет</td>
-                            <td>4</td>
-                            <td>0</td>
-                            <td>2020 - 2021 <i class="fa-solid fa-triangle-exclamation text-danger"></i></td>
-                          </tr>
+                          {% for s in student %}
+                            {% if s.user_id == user.id %}
+                              {% for dr in disc_reg %}
+                                {% if s.id == dr.student_id %}
+                                  <tr>
+                                    <th scope="row">dr.discipline</th>
+                                    <td>Экзамен</td>
+                                    <td>6</td>
+                                    <td>35</td>
+                                    <td>2021 - 2022</td>
+                                  </tr>
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                          {% endfor %}
                         </tbody>
                       </table>
                     </small>
                     <hr>
-                    <form action="{% url 'profile' %}" method="post" class="containet-sm px-5" novalidate>
+                    <form action="{% url 'dis' %}" method="post" class="containet-sm px-5" novalidate>
                       <span class="mt-3">
-                          <small class="text-danger">
-                              {% if form.errors %}
-                              {{ form.errors.error }}
-                              {% endif %}
-                          </small>                                
-                          {% csrf_token %}
-                          {{ form.student }}
-                          {{ form.discipline }}
+                            {% if submitted %}
+                            <small class="text-success py-2">
+                              Предмет успешно добавлен.
+                            </small>
+                            {% endif %}
+                            {% csrf_token %}                                
+                            {{ form | crispy }}
                           <span class="ml-5">
-                              <button class="btn w-50 btn-sm btn-outline-success" type="submit">Добавить в регистрационный лист</button>
+                            <button class="btn w-50 btn-sm btn-outline-success" type="submit">Добавить предмет</button>
                           </span>
                           <hr class="my-4">  
                       </span>
-                  </form>
+                    </form>
                 </div>
 {% endblock %}

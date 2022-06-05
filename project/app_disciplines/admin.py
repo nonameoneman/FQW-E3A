@@ -23,8 +23,9 @@ class DisciplinesAdmin(admin.ModelAdmin):
 class DisciplineRegAdmin(admin.ModelAdmin):
     model = Discipline_reg
     
-    list_display = ('discipline', 'credits', 'student_name', 'group_name', 'student', 'date_of_reg')
+    list_display = ('discipline', 'credits', 'student_name', 'group_name', 'student', 'date_of_reg', 'conf', 'abon')
     search_fields = ('discipline', 'student', 'date_of_reg')
+    list_editable = ('conf', 'abon')
     
 @admin.register(Credits_count)
 class CreditsCountAdmin(admin.ModelAdmin):
