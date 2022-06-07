@@ -15,8 +15,38 @@ class Form_controls(models.Model):
     
     class Meta:
         verbose_name = 'Форму контроля'
-        verbose_name_plural = 'Формы контроля'
+        verbose_name_plural = '3. Формы контроля'
         ordering = ['-name',]    
+        
+class Faculty(models.Model):
+    name = models.CharField(("Название"), max_length=150)
+    short_name = models.CharField(("Короткое название"), max_length=50)
+    cipher = models.IntegerField(("Шифр факультета"), null=True)
+    
+    def __str__(self):
+        return self.short_name
+    
+    class Meta:
+        verbose_name = 'Факультет'
+        verbose_name_plural = '1. Факультеты'
+        ordering = ['-name',]
+
+class Department(models.Model):
+    name = models.CharField(("Название"), max_length=150)
+    short_name = models.CharField(("Короткое название"), max_length=50)
+    сipher = models.IntegerField(("Шифр отделения"), null=True)
+    faculty = models.ForeignKey("app_disciplines.Faculty", verbose_name=("Факультет"), on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = ("Отделение")
+        verbose_name_plural = ("2. Отделения")
+
+    def __str__(self):
+        return self.short_name
+
+    def get_absolute_url(self):
+        return reverse("_detail", kwargs={"pk": self.pk})
+
 
 class Disciplines(models.Model):
     name = models.CharField(("Название"), max_length=150)
@@ -39,7 +69,7 @@ class Disciplines(models.Model):
     
     class Meta:
         verbose_name = 'Дисциплину'
-        verbose_name_plural = 'Дисциплины'
+        verbose_name_plural = '4. Дисциплины'
         ordering = ['name', ] 
 
 class Discipline_reg(models.Model):
@@ -66,7 +96,7 @@ class Discipline_reg(models.Model):
     
     class Meta:
         verbose_name = 'Регистрацию на предмет'
-        verbose_name_plural = 'Регистрации на предметы'
+        verbose_name_plural = '5. Регистрации на предметы'
         ordering = ['discipline', 'date_of_reg']
         
 class Credits_count(models.Model):

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Form_controls, Disciplines, Discipline_reg, Credits_count
+from .models import *
 
 # Register your models here.
 
@@ -33,3 +33,17 @@ class CreditsCountAdmin(admin.ModelAdmin):
     
     list_display = ('student', 'first_half', 'second_half', 'extra', 'total', 'dis_reg')
     search_field = ('dis_reg',)
+    
+@admin.register(Faculty)
+class FacultyAdmin(admin.ModelAdmin):
+    model = Faculty
+    
+    list_dislplay = ('name', 'short_name', 'cipher')
+    search_fields = ('name', 'short_name', 'cipher')
+    
+@admin.register(Department)
+class DepartmentAdmin(admin.ModelAdmin):
+    model = Department
+    
+    list_dislplay = ('name', 'short_name', 'cipher', 'faculty')
+    search_fields = ('name', 'short_name', 'cipher', 'faculty')

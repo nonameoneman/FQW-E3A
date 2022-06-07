@@ -49,7 +49,7 @@ admin.site.unregister(Group)
 class GroupsAdmin(admin.ModelAdmin):
     model = Groups
     
-    list_display = ('id', 'name', 'cours', 'form_of_e', 'credit_price', 'advisor')
+    list_display = ('id', 'name', 'cours', 'form_of_e', 'credit_price', 'advisor', 'department')
     list_display_links = ('id', 'name')
     search_fields = ('id', 'name')
     list_filter = ('cours', 'form_of_e', 'advisor')

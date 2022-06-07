@@ -120,7 +120,7 @@ class Groups(models.Model):
     cours = models.IntegerField(_("Курс"), null=True)
     credit_price = models.IntegerField(_("Стоимость кредита"), null=True)
     form_of_e = models.ForeignKey("Form_e", verbose_name=_("Форма обучения"), on_delete=models.PROTECT, null=True)
-    
+    department = models.ForeignKey("app_disciplines.Department", verbose_name=_("Отделение"), on_delete=models.PROTECT, null=True)
     def __str__(self):
         return self.name
     
