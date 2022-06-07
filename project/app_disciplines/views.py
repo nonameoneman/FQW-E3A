@@ -53,13 +53,13 @@ def dis(request):
     elif request.user.is_staff == True:
         return redirect('my_redirect')
     
-    else:
+    else:    
         initaial_data = {
             'student': find_stud,
-            'conf': False,
-            'abon': False,
         }
+        
         submitted = False
+        
         if request.method == "POST":
             form = DisciplineRegFrom(request.POST, initial=initaial_data)
             if form.is_valid():
@@ -81,5 +81,8 @@ def dis(request):
             'form': form,
             'title': 'Регистрация на предметы',
             'submitted': submitted
-        }   
+        }
+        
+        form.fields['student'].widget = forms.HiddenInput()
+           
         return render(request, 'app_disciplines/reg_s.html', context=context)

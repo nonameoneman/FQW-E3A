@@ -5,11 +5,9 @@ from django.urls import reverse_lazy
 from .models import Discipline_reg
 from app_users.models import *
 
-        
-
 class DisciplineRegFrom(ModelForm):
     
     class Meta:
         model = Discipline_reg
-        fields = ('student', 'discipline')
+        fields = ('discipline', 'student')
         success_url = reverse_lazy('dis')
