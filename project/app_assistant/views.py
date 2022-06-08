@@ -68,7 +68,7 @@ def my_redirect(request):
             'discipline': discipline,
             'dis_reg': dis_reg,
             'years': years,
-            'title': 'Ассистент Студентаа',
+            'title': 'Ассистент Студента',
         }
         
         return render(request, 'app_assistant/assistant_s.html', context=context)

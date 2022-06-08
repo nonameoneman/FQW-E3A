@@ -36,10 +36,6 @@
                                     </td>
                                   </tr>
                                   <tr>
-                                    <th>Оплата :</th>
-                                    <td><span class="text-secondary">9843</span> <u>с</u> / <span class="text-success">42800</span> <u>с</u></td>
-                                  </tr>
-                                  <tr>
                                     <th>Кредиты за курс :</th>
                                     <td><span class="text-secondary">29</span> / <span class="text-success">30</span></td>
                                   </tr>
@@ -76,33 +72,41 @@
                           <tr>
                             <th scope="col">Дисциплина</th>
                             <th scope="col">Форма контроля</th>
-                            <th scope="col">Всего кредитов</th>
-                            <th scope="col">Баллы</th>
-                            <th scope="col">Период регистрации</th>
+                            <th scope="col">Кол-во кредитов</th>
+                            <th scope="col">Кол-во часов</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Дата создания запроса</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <th scope="row">Дисциплина 1</th>
-                            <td>Экзамен</td>
-                            <td>6</td>
-                            <td>35</td>
-                            <td>2021 - 2022</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Дисциплина 2</th>
-                            <td>Курс/Раб</td>
-                            <td>1</td>
-                            <td>10</td>
-                            <td>2021 - 2022</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Дисциплина 3</th>
-                            <td>Зачет</td>
-                            <td>4</td>
-                            <td>0</td>
-                            <td>2020 - 2021 <i class="fa-solid fa-triangle-exclamation text-danger"></i></td>
-                          </tr>
+                          {% for s in student %}
+                            {% if s.user_id == user.id %}
+                              {% for dr in dis_reg %}
+                                {% if s.id == dr.student_id %}
+                                {% if dr.conf == True %}
+                                  <tr>
+                                    <th scope="row">{{ dr.discipline }}</th>
+                                    <td>{{ dr.discipline.form_control }}</td>
+                                    <td>{{ dr.discipline.credits }}</td>
+                                    <td>{{ dr.discipline.hours }}</td>
+                                    <td>
+                                        {% if dr.conf == True %}
+                                          <span class="text-success fw-bold">Подтверждено</span>
+                                        {% elif dr.abon == True %}
+                                          <span class="text-danger fw-bold">Отказано</span>
+                                        {% else %}
+                                          <span class="text-primary fw-bold">В обработке</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ dr.date_of_reg}}</td>
+                                  </tr>
+                                  {% else %}
+                                  <td>-</td>
+                                {% endif %}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                          {% endfor %}
                         </tbody>
                       </table>
                     </small>
