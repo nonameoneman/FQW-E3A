@@ -52,7 +52,7 @@ class GroupsAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'cours', 'form_of_e', 'credit_price', 'advisor', 'department')
     list_display_links = ('id', 'name')
     search_fields = ('id', 'name')
-    list_filter = ('cours', 'form_of_e', 'advisor')
+    list_filter = ('department', 'cours', 'form_of_e', 'advisor')
     
 #@admin.register(Form_e)
 #class FormEAdmin(admin.ModelAdmin):

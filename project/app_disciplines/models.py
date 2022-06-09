@@ -38,8 +38,8 @@ class Department(models.Model):
     faculty = models.ForeignKey("app_disciplines.Faculty", verbose_name=("Факультет"), on_delete=models.PROTECT)
 
     class Meta:
-        verbose_name = ("Отделение")
-        verbose_name_plural = ("2. Отделения")
+        verbose_name = ("Кафедру")
+        verbose_name_plural = ("2. Кафедры")
 
     def __str__(self):
         return self.short_name
@@ -53,7 +53,8 @@ class Disciplines(models.Model):
     short_name = models.CharField(("Короткое название"), max_length=75)
     credits = models.IntegerField(("Количество кредитов"), null=True)
     hours = models.IntegerField(("Количество часов"), null=True)
-    form_control = models.ForeignKey("Form_controls", verbose_name=("Форма контроля"), on_delete=models.PROTECT)
+    department = models.ForeignKey("app_disciplines.Department", verbose_name=("Отделение"), on_delete=models.PROTECT, null=True)
+    form_control = models.ForeignKey("Form_controls", verbose_name=("Форма контроля"), on_delete=models.PROTECT, null=True)
     teacher = models.ForeignKey("app_users.Teacher", verbose_name=("Преподаватель"), on_delete=models.PROTECT, null=True)
     fh = models.BooleanField(("Первое полугодие"), null=True)
     sh = models.BooleanField(("Второе полугодие"), null=True)
