@@ -83,6 +83,16 @@ def dis(request):
             'submitted': submitted
         }
         
+        def disc_filter():
+            for s in student:
+                if s.user_id == request.user.id:
+                    for g in groups:
+                        if s.groups_id == g.id:                 
+                            for dr in dis_reg:
+                                if dis_reg.department_id == g.department_id:
+                                    return dis_reg.id
+        
         form.fields['student'].widget = forms.HiddenInput()
+        form.fields['discipline'].queryset = Discipline_reg.objects.filter(id=[disc_filter(),])
            
         return render(request, 'app_disciplines/reg_s.html', context=context)
