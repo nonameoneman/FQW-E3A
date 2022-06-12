@@ -103,6 +103,50 @@
                         </tbody>
                       </table>
                     </small>
+                    <hr class="my-4">
+                    <p class="text-primary fw-bold my-2">Мои предметы:</p>
+                    <small class="text-center">
+                      <table class="table table-striped table-bordered border-dark rounded"> <!-- Мои группы -->
+                        <thead>
+                          <tr>
+                            <th scope="col">Дисциплина</th>
+                            <th scope="col">Кол-во кредитов</th>
+                            <th scope="col">Кол-во часов</th>
+                            <th scope="col">Кафедра</th>
+                            <th scope="col">Форма контроля</th>
+                            <th scope="col">Периоды</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for d in discipline %}
+                            {% for t in teacher %}
+                              {% if t.user_id == user.id %}
+                                {% if d.teacher_id == t.id %}
+                                  <tr>
+                                    <th scope="row"> {{d.short_name}} </th>
+                                    <td> {{d.credits}} </td>
+                                    <td> {{d.hours}} </td>
+                                    <td> {{d.department}} </td>
+                                    <td> {{d.form_control}} </td>
+                                    <td>                                       
+                                      {% if d.fh == true %}
+                                        Осень,  
+                                      {% endif %}
+                                      {% if d.sh == true %}
+                                        Весна,  
+                                      {% endif %}
+                                      {% if d.xtr == true %}
+                                        I,  
+                                      {% endif %} 
+                                  </td>
+                                  <tr>
+                                {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endfor %}  
+                        </tbody>
+                      </table>
+                    </small>
                   </div>
                 </div>
 {% endblock %}

@@ -13,12 +13,20 @@ def my_redirect(request):
         groups = Groups.objects.all()
         student = Student.objects.all()
         advisor = Advisor.objects.all()
+        teacher = Teacher.objects.all()
+        discipline = Disciplines.objects.all()
+        dis_reg = Discipline_reg.objects.all()
+        years = Ac_years.objects.all()
         
         context = {
             'users': user,
             'advisor': advisor,
             'groups': groups,
             'student': student,
+            'teacher': teacher,
+            'discipline': discipline,
+            'dis_reg': dis_reg,
+            'years': years,
             'title': 'Ассистент Советника',
         }
             
@@ -43,10 +51,10 @@ def my_redirect(request):
             'discipline': discipline,
             'dis_reg': dis_reg,
             'years': years,
-            'title': 'Ассистент Студентаа',
+            'title':'Ассистент Преподавателя',
         }
         
-        return render(request, 'app_assistant/assistant_t.html', {'title':'Ассистент Преподавателя'})
+        return render(request, 'app_assistant/assistant_t.html', context=context)
     
     elif request.user.is_staff == True:
         return render(request, 'admin_redirect.html', {'title':'Администратор'})

@@ -2,6 +2,7 @@ from tabnanny import verbose
 from xmlrpc.client import boolean
 from django.db import models
 from django.forms import CharField
+from django.urls import reverse
 
 
 # Create your models here.
@@ -79,6 +80,9 @@ class Discipline_reg(models.Model):
     date_of_reg = models.DateField(("Дата регистрации"), auto_now=False, auto_now_add=True)
     conf = models.BooleanField(("Подтверждаю"), default=False)
     abon = models.BooleanField(("Отказываю"), default=False)
+    send = models.BooleanField(("Отправить советнику"), default=False)
+    academ_c = models.BooleanField(("Подтверждение советника"), default=False)
+    academ_a = models.BooleanField(("Отказ советника"), default=False)
     
     @property
     def student_name(self):
