@@ -86,10 +86,15 @@ def dis(request):
         submitted = False
         
         if request.method == "POST":
-            form = DisciplineRegFrom(request.POST, initial=initaial_data)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/disciplines/?submitted=true')
+            if 'academ' in request.POST:
+                academ_list = request.POST.getlist('send')
+                for snd in academ_list:
+                    dis_reg.filter(pk=int(snd)).update(send=True)
+            elif 'create' in request.POST:
+                form = DisciplineRegFrom(request.POST, initial=initaial_data)
+                if form.is_valid():
+                    form.save()
+                    return HttpResponseRedirect('/disciplines/?submitted=true')
         else:
             form = DisciplineRegFrom(initial=initaial_data)
             if 'submitted' in request.GET:
@@ -141,12 +146,12 @@ def dis(request):
             'teacher': teacher,
             'dis': dis,
             'dis_reg': dis_reg,
-            'form': form,
             'title': 'Регистрация на предметы',
             'submitted': submitted,
             'cf': credit_counting_conf(),
             'cr': credit_counting_req(),
             'co': credit_ost(),
+            'form': form,
         }
         
         def disc_filter():
@@ -163,3 +168,55 @@ def dis(request):
         form.fields['discipline'].queryset = Disciplines.objects.filter(department_id=disc_filter())
            
         return render(request, 'app_disciplines/reg_s.html', context=context)
+
+def academ_conf(request):
+    user = User.objects.all()
+    groups = Groups.objects.all()
+    student = Student.objects.all()
+    advisor = Advisor.objects.all()
+    teacher = Teacher.objects.all()
+    dis = Disciplines.objects.all()
+    dis_reg = Discipline_reg.objects.all()
+    
+    if request.user.is_authenticated == False:
+        return redirect('login/')
+    
+    if request.user.is_advisor == True:
+        context = {
+            'users': user,
+            'advisor': advisor,
+            'groups': groups,
+            'student': student,
+            'teacher': teacher,
+            'dis': dis,
+            'dis_reg': dis_reg,
+            'title': 'Запросы на регистрацию',
+        }  
+        
+        return render(request, 'app_disciplines/ac_a.html', context=context)
+    
+    elif request.user.is_teacher == True:
+        return redirect('my_redirect')
+    
+    elif request.user.is_staff == True:
+        return redirect('my_redirect')
+    
+    else:       
+        if request.method == "POST":
+            if 'academ' in request.POST:
+                academ_list = request.POST.getlist('send')
+                for snd in academ_list:
+                    dis_reg.filter(pk=int(snd)).update(send=True)
+        
+        context = {
+            'users': user,
+            'advisor': advisor,
+            'groups': groups,
+            'student': student,
+            'teacher': teacher,
+            'dis': dis,
+            'dis_reg': dis_reg,
+            'title': 'Регистрация на предметы',
+        }
+           
+        return render(request, 'app_disciplines/ac_s.html', context=context)

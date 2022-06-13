@@ -83,6 +83,7 @@ class Discipline_reg(models.Model):
     send = models.BooleanField(("Отправить советнику"), default=False)
     academ_c = models.BooleanField(("Подтверждение советника"), default=False)
     academ_a = models.BooleanField(("Отказ советника"), default=False)
+    hide = models.BooleanField(("Скрыть результат"), default=False)
     
     @property
     def student_name(self):

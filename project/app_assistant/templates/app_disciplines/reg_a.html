@@ -12,7 +12,7 @@
                 <hr>
                 <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
                   <div class="row my-2 overflow-auto">
-                    <p class="text-primary fw-bold my-2">Запросы по предметам: </p>
+                    <p class="text-primary fw-bold my-2">Запросы по моим предметам: </p>
                     <small class="text-center">
                       <form action="" method="POST">
                         {% csrf_token %}
@@ -71,45 +71,6 @@
                     </small>
                   </div>
                   <hr class="my-4">
-                  <div class="row my-2 overflow-auto">
-                    <p class="text-primary fw-bold my-2">Запросы по регистрационным листам:</p>
-                    <br class="m-2">
-                    <small class="text-center">
-                      <table class="table table-striped table-bordered border-dark"> <!-- Все стденты -->
-                        <thead>
-                          <tr>
-                            <th scope="col">Шифр</th>
-                            <th scope="col">Фио, Группа</th>
-                            <th scope="col">Остаток оплаты (кредиты)</th>
-                            <th scope="col">Не сдано предметов</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for a in advisor %}
-                            {% if user.id == a.user_id %}
-            
-                              {% for g in groups %}
-                                {% if a.pk == g.advisor_id %}
-
-                                  {% for s in student %}
-                                    {% if s.groups_id == g.id %}
-                                    <tr>
-                                      <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> {{ s.cipher }} </th>
-                                      <td>{{ s.name }}, {{ g.name }}</td>
-                                      <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                                      <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
-                                    </tr>
-                                    {% endif %}
-                                  {% endfor %}
-
-                                {% endif %}
-                              {% endfor %}
-
-                            {% endif %}
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                    </small>
-                  </div>
+                  <a href="{% url 'ac_conf' %}" class="btn btn-sm btn-outline-primary m-4 fw-bold">Страница запросов по регистрационным листам <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 {% endblock %}
