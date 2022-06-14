@@ -105,7 +105,7 @@ def dis(request):
             for dr in dis_reg:
                 for s in student:
                     if s.user_id == request.user.id:
-                        if dr.student_id == s.id and dr.conf == True:
+                        if dr.student_id == s.id and dr.academ_c == True:
                             all_data.append(dr.discipline.credits)
             count = 0
             for a in all_data:

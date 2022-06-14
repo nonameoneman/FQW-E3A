@@ -1,87 +1,25 @@
 {% extends 'base_a.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 {{title}}
 {% endblock %}
 
 {% block logo-link %}
-{% url 'assistant_a' %}
+{% url 'my_redirect' %}
 {% endblock %}
 
 {% block body %}
                 <hr>
                 <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
                   <div class="row rounded border border-dark border-2 my-2">
-                    <p class="text-primary fw-bold my-2">Мои группы: </p>
+                    <p class="text-primary fw-bold my-2">Создать новость: </p>
                     <small class="text-center">
-                      <table class="table table-striped"> <!-- Мои группы -->
-                        <thead>
-                          <tr>
-                            <th scope="col">Группа</th>
-                            <th scope="col">Форма обучения</th>
-                            <th scope="col">Форма оплаты</th>
-                            <th scope="col">Всего студентов</th>
-                            <th scope="col">Студенты с проблемой</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">ИВТ-1-18</th>
-                            <td>Очная</td>
-                            <td>Контракт</td>
-                            <td>24</td>
-                            <td><a href="#" title="Показать студентов"><i class="fa-solid fa-eye text-danger"></i></a> 4</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">ИВТ-1-18</th>
-                            <td>Очная</td>
-                            <td>Контракт</td>
-                            <td>24</td>
-                            <td><a href="#" title="Показать студентов"><i class="fa-solid fa-eye text-danger"></i></a> 4</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">ИВТ-1-18</th>
-                            <td>Очная</td>
-                            <td>Контракт</td>
-                            <td>24</td>
-                            <td><a href="#" title="Показать студентов"><i class="fa-solid fa-eye text-danger"></i></a> 4</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </small>
-                  </div>
-                  <div class="row rounded border border-dark border-2 my-2">
-                    <p class="text-primary fw-bold my-2">Мои студенты:</p>
-                    <small class="text-center">
-                      <table class="table table-striped"> <!-- Все стденты -->
-                        <thead>
-                          <tr>
-                            <th scope="col">Шифр</th>
-                            <th scope="col">Фио, Группа</th>
-                            <th scope="col">Остаток оплаты (кредиты)</th>
-                            <th scope="col">Не сдано предметов</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> 18/123456</th>
-                            <td>Студентов Студент Студентович, ИВТ-1-18</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
-                          </tr>
-                          <tr>
-                            <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> 18/123456</th>
-                            <td>Студентов Студент Студентович, ИВТ-1-18</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
-                          </tr><tr>
-                            <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> 18/123456</th>
-                            <td>Студентов Студент Студентович, ИВТ-1-18</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                            <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      <form action="{% url 'news' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form.advisor | as_crispy_field }}
+                        <button class="btn w-50 btn-sm btn-outline-success" type="submit" name="create">Создать запрос</button>
+                      </form>
                     </small>
                   </div>
                 </div>

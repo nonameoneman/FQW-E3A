@@ -18,15 +18,3 @@ class EditProfileView(generic.UpdateView):
     
     def get_object(self):
         return self.request.user
-
-def my_advisor(request):
-        advisor = Advisor.objects.all()
-        user = User.objects.all()
-       
-        context = {
-                'adv': user,
-                'dop': advisor,
-                'title': 'Мой советник',
-        }
-        
-        return render(request, 'app_profiles/my_advisor.html', context=context)

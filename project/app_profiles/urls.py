@@ -8,5 +8,4 @@ from app_profiles import views
 urlpatterns = [
         path('edit_profile/', views.EditProfileView.as_view(), name='profile'),
         path('password/', views.EditPasswordView.as_view(), name='password'),
-        path('my_advisor/', views.my_advisor, name='my_advisor'),
 ]

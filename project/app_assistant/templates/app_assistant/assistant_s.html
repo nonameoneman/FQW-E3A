@@ -32,30 +32,22 @@
                                   <tr>
                                     <th>Советник :</th>
                                     <td>
-                                      {{ s.advisor }}
+                                      <span class="fw-bold">ФИО:</span> {{ s.advisor }}
+                                      <br>
+                                      <span class="fw-bold">Почта: </span>
+                                      <a href="mailto:{{ s.advisor.user.email }}" title="Написать">{{ s.advisor.user.email }}</a>
+                                      <br>
+                                      <span class="fw-bold">Телефон: </span>
+                                      <a href="tel:{{ s.advisor.user.phone_number }}" title="Позвонить">{{ s.advisor.user.phone_number }}</a>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <th>Кредиты за курс :</th>
-                                    <td><span class="text-secondary">29</span> / <span class="text-success">30</span></td>
-                                  </tr>
-                                  <tr>
-                                    <th>Кредиты всего :</th>
+                                    <th>Кредитов зарегистрированно :</th>
                                     <td> 
-                                    {% for dr in dis_reg %}  
-                                    {% if dr.student_id == s.id %}
-                                    
-                                            <span class="text-secondary">
-                                              {{ dr.credits }}
-                                            </span> 
-                                            
-                                    {% endif %}
-                                    {% endfor %}
+                                      <span class="text-secondary">
+                                        {{ cf }}
+                                      </span>
                                     / <span class="text-success">120</span></td>
-                                  </tr>
-                                  <tr>
-                                    <th>Задолженности :</th>
-                                    <td> 1 </td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -63,7 +55,6 @@
                     {% endif %}
                   {% endfor %}
                   </div>
-                  <hr class="my-4">
                   <div class="row my-2 overflow-auto">
                     <p class="text-primary fw-bold my-2">Статистика по предметам:</p>
                     <small class="text-center">
@@ -90,18 +81,22 @@
                                     <td>{{ dr.discipline.credits }}</td>
                                     <td>{{ dr.discipline.hours }}</td>
                                     <td>
-                                        {% if dr.conf == True %}
-                                          <span class="text-success fw-bold">Подтверждено</span>
-                                        {% elif dr.abon == True %}
-                                          <span class="text-danger fw-bold">Отказано</span>
-                                        {% else %}
-                                          <span class="text-primary fw-bold">В обработке</span>
-                                        {% endif %}
+                                      {% if dr.hide == False %}
+                                          {% if dr.academ_c == True %}
+                                            <span class="text-success fw-bold">Подтверждено советником</span>
+                                          {% elif dr.academ_a == True %}
+                                            <span class="text-danger fw-bold">Отказано советником</span>
+                                          {% else %}
+                                            <span class="text-primary fw-bold">Запрос поступил советнику</span>
+                                          {% endif %}
+                                      {% elif dr.hide == True%}
+                                          {% if dr.academ_c == True %}
+                                            <span class="text-success fw-bold">Подтверждено деканатом</span>
+                                          {% endif %}  
+                                      {% endif %}
                                     </td>
                                     <td>{{ dr.date_of_reg}}</td>
                                   </tr>
-                                  {% else %}
-                                  <td>-</td>
                                 {% endif %}
                                 {% endif %}
                               {% endfor %}
