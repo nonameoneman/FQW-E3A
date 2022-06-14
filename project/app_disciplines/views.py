@@ -191,7 +191,18 @@ def academ_conf(request):
             'dis': dis,
             'dis_reg': dis_reg,
             'title': 'Запросы на регистрацию',
-        }  
+        }
+        
+        if request.method == "POST":
+            conf_list = request.POST.getlist('cnf')
+            for c in conf_list:
+                dis_reg.filter(pk=int(c)).update(academ_c=True)
+            
+            abon_list = request.POST.getlist('abn')
+            for a in abon_list:
+                dis_reg.filter(pk=int(a)).update(academ_b=True)    
+                
+            return redirect('ac_conf')  
         
         return render(request, 'app_disciplines/ac_a.html', context=context)
     
@@ -207,6 +218,10 @@ def academ_conf(request):
                 academ_list = request.POST.getlist('send')
                 for snd in academ_list:
                     dis_reg.filter(pk=int(snd)).update(send=True)
+            elif 'clear' in request.POST:
+                clear_list = request.POST.getlist('hide')
+                for clr in clear_list:
+                    dis_reg.filter(pk=int(clr)).update(hide=True)
         
         context = {
             'users': user,
@@ -220,3 +235,27 @@ def academ_conf(request):
         }
            
         return render(request, 'app_disciplines/ac_s.html', context=context)
+    
+def reg_list(request):
+    if request.user.is_advisor == False and request.user.is_teacher == False and request.user.is_staff == False:
+        
+        user = User.objects.all()
+        groups = Groups.objects.all()
+        student = Student.objects.all()
+        advisor = Advisor.objects.all()
+        teacher = Teacher.objects.all()
+        dis = Disciplines.objects.all()
+        dis_reg = Discipline_reg.objects.all()
+        
+        context = {
+            'users': user,
+            'advisor': advisor,
+            'groups': groups,
+            'student': student,
+            'teacher': teacher,
+            'dis': dis,
+            'dis_reg': dis_reg,
+            'title': 'Регистрация на предметы',
+        }
+
+        return render(request, 'app_disciplines/reg_list.html', context=context)

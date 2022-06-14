@@ -49,7 +49,7 @@
                                             </div>
                                             {% elif dr.conf == True and dr.send == True%}
                                             <span class="text-success fw-bold"><i class="fa-solid fa-check"></i> Подтверждено</span>
-                                            <br>
+                                            <hr class="mt-0 mb-0">
                                             <span class="text-secondary small">Отправлено советнику</span>
                                             {% endif %}
                                         </td>
@@ -75,7 +75,7 @@
                                     <th scope="col">Кол-во кредитов</th>
                                     <th scope="col">Кол-во часов</th>
                                     <th scope="col">Статус</th>
-                                    <th scope="col">Дата создания запроса</th>
+                                    <th scope="col">Действие</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -85,6 +85,7 @@
                                         {% if s.id == dr.student_id %}
                                         {% if dr.conf == True and dr.send == True%}
                                         <tr>
+                                            {% if dr.hide != True %}
                                             <th scope="row">{{ dr.discipline }}</th>
                                             <td>{{ dr.discipline.form_control }}</td>
                                             <td>{{ dr.discipline.credits }}</td>
@@ -92,6 +93,8 @@
                                             <td>
                                                 {% if dr.academ_c == True %}
                                                 <span class="text-success fw-bold"><i class="fa-solid fa-check"></i> Подтверждено</span>
+                                                <hr class="mt-0 mb-0">
+                                                <span class="text-secondary small">Подтверждено советником</span>
                                                 {% elif dr.academ_a == True %}
                                                 <span class="text-danger fw-bold"><i class="fa-solid fa-xmark"></i> Отказано</span>
                                                 {% else %}
@@ -100,7 +103,13 @@
                                                 <span class="text-secondary small">Ожидается ответ советника</span>
                                                 {% endif %}
                                             </td>
-                                            <td>{{ dr.date_of_reg}}</td>
+                                            <td>
+                                                <div class="form-check text-align-center">
+                                                    <input class="form-check-input" type="checkbox" value="{{dr.id}}" name="hide">
+                                                    <span class="text-secondary small">Выбрать для закрытия</span>
+                                                </div>
+                                            </td>
+                                            {% endif %}
                                         </tr>
                                         {% endif %}
                                         {% endif %}
@@ -109,8 +118,8 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                            <a class="btn btn-sm btn-outline-primary m-4" name="clear">Страница загрузки листа <i class="fa-solid fa-arrow-right"></i> </a>
-                            <button class="btn btn-sm btn-outline-danger m-4" type="submit" name="clear"><i class="fa-solid fa-check-double"></i> Завершить регистрацию</button>
+                            <a href="{% url 'reg_list' %}" class="btn btn-sm btn-outline-primary m-4">Страница загрузки листа <span class="small">(перед закрытием)</span> <i class="fa-solid fa-arrow-right"></i> </a>
+                            <button class="btn btn-sm btn-outline-danger m-4" type="submit" name="clear"><i class="fa-solid fa-check-double"></i> Закрыть регистрацию выбранных предметов</button>
                             </small>
     
                         </form>

@@ -20,9 +20,9 @@
                             <thead>
                             <tr>
                                 <th scope="col">Студент</th>
-                                <th scope="col">Список предметов</th>
-                                <th scope="col">Всего кредитов</th>
-                                <th scope="col">Статус</th>
+                                <th scope="col">Дисциплина</th>
+                                <th scope="col">Преподаватель</th>
+                                <th scope="col">Действие</th>
                             </tr>
                             </thead>
                             <tbody>      
@@ -37,9 +37,30 @@
                                                             {% if dr.send == True %}
                                                             <tr>
                                                                 <th>{{ dr.student.name }}, {{ dr.student.groups.name }}</th>
-                                                                <td>{{ dr.student }}</td>
-                                                                <td>{{ dr.student }}</td>
-                                                                <td>{{ dr.student }}</td>
+                                                                <td>{{ dr.discipline }}</td>
+                                                                <td>{{ dr.discipline.teacher.name }}
+                                                                    {% if dr.conf == True %}
+                                                                    <hr class="mt-1 mb-1">
+                                                                    <span class="text-success small">Подтверждено преподавателем</span>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>
+                                                                    {% if dr.hide == False %}
+                                                                        {% if dr.academ_c == True %}
+                                                                            <span class="text-success fw-bold"><i class="fa-solid fa-check"></i> Подтверждено</span>
+                                                                        {% elif dr.academ_a == True %}                                                                    
+                                                                            <span class="text-danger fw-bold"><i class="fa-solid fa-xmark"></i> Отказано</span>
+                                                                        {% else %}
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" value="{{dr.id}}" name="cnf"><span class="text-success fw-bold">Подтвердить</span>
+                                                                            </div>
+                                                                            <hr class="mt-1 mb-1">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" value="{{dr.id}}" name="abn"><span class="text-danger fw-bold">Отказать</span>
+                                                                            </div> 
+                                                                        {% endif %}
+                                                                    {% endif %}
+                                                                </td>
                                                             </tr>
                                                             {% endif %}
                                                         {% endif %}
@@ -52,7 +73,7 @@
                             {% endfor %}
                             </tbody>
                         </table>
-                        <button class="btn w-50 btn-sm btn-outline-success m-4" type="submit" name="academ">Подтвердить регистрацию</button>
+                        <button class="btn w-50 btn-sm btn-outline-success m-4" type="submit" name="ac_choice">Вернуть выбранные значения студентам</button>
                         </small>    
                         </form>
 
