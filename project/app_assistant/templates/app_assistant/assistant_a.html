@@ -14,7 +14,7 @@
                   <div class="row my-2 overflow-auto">
                     <p class="text-primary fw-bold my-2">Мои группы: </p>
                     <small class="text-center">
-                      <table class="table table-striped table-bordered border-dark rounded"> <!-- Мои группы -->
+                      <table class="table table-striped table-bordered border-$gray-500"> <!-- Мои группы -->
                         <thead>
                           <tr>
                             <th scope="col">Группа</th>
@@ -68,7 +68,7 @@
                     <p class="text-primary fw-bold my-2">Мои студенты:</p>
                     <br class="m-2">
                     <small class="text-center">
-                      <table class="table table-striped table-bordered border-dark"> <!-- Все стденты -->
+                      <table class="table table-striped table-bordered border-$gray-500"> <!-- Все стденты -->
                         <thead>
                           <tr>
                             <th scope="col">Шифр</th>
@@ -88,7 +88,7 @@
                                   {% for s in student %}
                                     {% if s.groups_id == g.id %}
                                     <tr>
-                                      <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> {{ s.cipher }} </th>
+                                      <th scope="row"> {{ s.cipher }} </th>
                                       <td>{{ s.groups }}</td>
                                       <td>{{ s.name }}</td>
                                       <td>
@@ -114,7 +114,7 @@
                     <hr class="my-4">
                     <p class="text-primary fw-bold my-2">Мои предметы:</p>
                     <small class="text-center">
-                      <table class="table table-striped table-bordered border-dark rounded"> <!-- Мои группы -->
+                      <table class="table table-striped table-bordered border-$gray-500"> <!-- Мои группы -->
                         <thead>
                           <tr>
                             <th scope="col">Дисциплина</th>

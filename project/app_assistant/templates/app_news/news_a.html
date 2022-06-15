@@ -35,10 +35,10 @@
                               {% if a.pk == n.advisor_id %}
                                 <div class="border border-primary border-1 rounded-3 mt-3 mb-3 p-3">
                                   <h5 class="fw-bold">{{ n.title }}</h5>
-                                  <hr class="mt-2 mb-2">
+                                  <hr class="mt-2 mb-2 text-$gray-100">
                                   <p>{{ n.text }}</p>
-                                  <hr class="mt-2 mb-2">                                
-                                  <p class="small text-right text-secondary">Дата публикации: {{ n.date_of_pub }}</p>
+                                  <hr class="mt-2 mb-2 text-$gray-100">                                
+                                  <p class="small text-right text-secondary">Дата публикации: <span class="text-dark fw-bold">{{ n.date_of_pub }}</span></p>
                                 </div>
                               </tr>
                               {% endif %}

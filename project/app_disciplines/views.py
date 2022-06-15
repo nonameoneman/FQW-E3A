@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render
 from app_users.models import *
 from .models import *
 from .forms import *
+import datetime
 
       
 def dis(request):
@@ -237,17 +238,36 @@ def academ_conf(request):
         return render(request, 'app_disciplines/ac_s.html', context=context)
     
 def reg_list(request):
-    if request.user.is_advisor == False and request.user.is_teacher == False and request.user.is_staff == False:
-        
-        user = User.objects.all()
-        groups = Groups.objects.all()
-        student = Student.objects.all()
-        advisor = Advisor.objects.all()
-        teacher = Teacher.objects.all()
-        dis = Disciplines.objects.all()
-        dis_reg = Discipline_reg.objects.all()
+    
+    user = User.objects.all()
+    groups = Groups.objects.all()
+    student = Student.objects.all()
+    advisor = Advisor.objects.all()
+    teacher = Teacher.objects.all()
+    dis = Disciplines.objects.all()
+    dis_reg = Discipline_reg.objects.all()
+
+    if request.user.is_advisor == True:
+        return redirect('my_redirect')
+    elif request.user.is_teacher == True: 
+        return redirect('my_redirect')
+    elif request.user.is_staff == True: 
+        return redirect('my_redirect')   
+    else:
+        if request.method == "POST":
+            if 'academ' in request.POST:
+                academ_list = request.POST.getlist('send')
+                for snd in academ_list:
+                    dis_reg.filter(pk=int(snd)).update(send=True)
+            elif 'clear' in request.POST:
+                clear_list = request.POST.getlist('hide')
+                for clr in clear_list:
+                    dis_reg.filter(pk=int(clr)).update(hide=True)
+                    
+        date = datetime.date.today()
         
         context = {
+            'date' : date,
             'users': user,
             'advisor': advisor,
             'groups': groups,

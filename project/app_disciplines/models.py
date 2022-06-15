@@ -38,15 +38,12 @@ class Department(models.Model):
     сipher = models.IntegerField(("Шифр отделения"), null=True)
     faculty = models.ForeignKey("app_disciplines.Faculty", verbose_name=("Факультет"), on_delete=models.PROTECT)
 
-    class Meta:
-        verbose_name = ("Кафедру")
-        verbose_name_plural = ("2. Кафедры")
-
     def __str__(self):
         return self.short_name
 
-    def get_absolute_url(self):
-        return reverse("_detail", kwargs={"pk": self.pk})
+    class Meta:
+        verbose_name = ("Кафедру")
+        verbose_name_plural = ("2. Кафедры")
 
 
 class Disciplines(models.Model):
