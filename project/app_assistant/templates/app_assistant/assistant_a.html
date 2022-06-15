@@ -72,9 +72,10 @@
                         <thead>
                           <tr>
                             <th scope="col">Шифр</th>
-                            <th scope="col">Фио, Группа</th>
-                            <th scope="col">Остаток оплаты (кредиты)</th>
-                            <th scope="col">Не сдано предметов</th>
+                            <th scope="col">Группа</th>
+                            <th scope="col">ФИО</th>
+                            <th scope="col">Номер телефона</th>
+                            <th scope="col">Почта</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -88,9 +89,16 @@
                                     {% if s.groups_id == g.id %}
                                     <tr>
                                       <th scope="row"><a href="#" title="Показать профиль"><i class="fa-solid fa-address-card text-success"></i></a> {{ s.cipher }} </th>
-                                      <td>{{ s.name }}, {{ g.name }}</td>
-                                      <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 19</td>
-                                      <td><a href="#" title="Уведомить"><i class="fa-solid fa-triangle-exclamation text-danger"></i></a> 5</td>
+                                      <td>{{ s.groups }}</td>
+                                      <td>{{ s.name }}</td>
+                                      <td>
+                                        <a href="tel:{{ s.user.phone_number }}" title="Позвонить" class="text-decoration-none"><i class="fa-solid fa-phone"></i></a>
+                                        {{ s.user.phone_number }}
+                                      </td>
+                                      <td>  
+                                        <a href="mailto:{{ s.user.email }}" title="Написать" class="text-decoration-none"><i class="fa-solid fa-envelope"></i></a>
+                                        {{ s.user.email }}
+                                      </td>
                                     </tr>
                                     {% endif %}
                                   {% endfor %}

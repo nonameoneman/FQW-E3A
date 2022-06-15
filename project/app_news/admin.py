@@ -3,9 +3,9 @@ from .models import *
 
 # Register your models here.
 
-@admin.register(news)
+@admin.register(News)
 class CreditsCountAdmin(admin.ModelAdmin):
-    model = news
+    model = News
     
     list_display = ('title', 'text', 'advisor', 'date_of_pub',)
     search_field = ('title', 'advisor',)

@@ -30,16 +30,8 @@
                                     <td>{{ s.course }}</td>
                                   </tr>
                                   <tr>
-                                    <th>Советник :</th>
-                                    <td>
-                                      <span class="fw-bold">ФИО:</span> {{ s.advisor }}
-                                      <br>
-                                      <span class="fw-bold">Почта: </span>
-                                      <a href="mailto:{{ s.advisor.user.email }}" title="Написать">{{ s.advisor.user.email }}</a>
-                                      <br>
-                                      <span class="fw-bold">Телефон: </span>
-                                      <a href="tel:{{ s.advisor.user.phone_number }}" title="Позвонить">{{ s.advisor.user.phone_number }}</a>
-                                    </td>
+                                    <th>Стоимость одного кредита :</th>
+                                    <td>{{ s.groups.credit_price }} <u>с</u></td>
                                   </tr>
                                   <tr>
                                     <th>Кредитов зарегистрированно :</th>
@@ -48,6 +40,18 @@
                                         {{ cf }}
                                       </span>
                                     / <span class="text-success">120</span></td>
+                                  </tr>
+                                  <tr>
+                                    <th>Советник :</th>
+                                    <td>
+                                      {{ s.advisor }}
+                                      <br>
+                                      <a href="tel:{{ s.advisor.user.phone_number }}" title="Позвонить" class="text-decoration-none"><i class="fa-solid fa-phone"></i></a>
+                                      {{ s.advisor.user.phone_number }}
+                                      <br>
+                                      <a href="mailto:{{ s.advisor.user.email }}" title="Написать" class="text-decoration-none"><i class="fa-solid fa-envelope"></i></a>
+                                      {{ s.advisor.user.email }}
+                                    </td>
                                   </tr>
                                 </tbody>
                               </table>

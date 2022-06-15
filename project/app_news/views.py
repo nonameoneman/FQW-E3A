@@ -1,22 +1,28 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from app_users.models import *
 from app_news.forms import *
 
 def news(request):
+    
+    user = User.objects.all()
+    groups = Groups.objects.all()
+    student = Student.objects.all()
+    advisor = Advisor.objects.all()
+    news = News.objects.all()
+    
+    def find_advisor():
+        for a in advisor:
+            if a.user_id == request.user.id:
+                return a.pk
+    
     if request.user.is_advisor == True:    
-        user = User.objects.all()
-        groups = Groups.objects.all()
-        student = Student.objects.all()
-        advisor = Advisor.objects.all()
-        
-        def find_advisor():
-            for a in advisor:
-                if a.user_id == request.user.id:
-                    return a.pk
         
         initaial_data = {
             'advisor': find_advisor,
         }
+        
+        submitted = False
         
         if request.method == "POST":
             form = NewsForm(request.POST, initial=initaial_data)
@@ -28,12 +34,15 @@ def news(request):
             if 'submitted' in request.GET:
                 submitted = True
         
+        form.fields['advisor'].widget = forms.HiddenInput()
+        
         context = {
-            form: form,
+            'form': form,
             'users': user,
             'advisor': advisor,
             'groups': groups,
             'student': student,
+            'news': news,
             'title':'Управление новостями',
         }
         
@@ -42,17 +51,13 @@ def news(request):
     elif request.user.is_teacher == True or request.user.is_staff:
         return redirect('my_redirect')
     
-    else:
-        user = User.objects.all()
-        groups = Groups.objects.all()
-        student = Student.objects.all()
-        advisor = Advisor.objects.all()
-        
+    else:        
         context = {
             'users': user,
             'advisor': advisor,
             'groups': groups,
             'student': student,
+            'news': news,
             'title':'Новости',
         }
         

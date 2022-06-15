@@ -36,7 +36,7 @@
                                {% if d.teacher_id == t.id %}
                                  {% for dr in dis_reg %}
                                    {% if dr.discipline_id == d.id %}
-                                     {% if dr.conf != True and dr.abon != True %}
+                                     {% if dr.conf != True and dr.abon != True and dr.hide != True %}
                                      
                                      <tr>
                                        <th scope="row">{{dr.student.name}}, {{dr.student.cipher}}</th>

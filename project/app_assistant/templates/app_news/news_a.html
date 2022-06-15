@@ -12,15 +12,38 @@
 {% block body %}
                 <hr>
                 <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
-                  <div class="row rounded border border-dark border-2 my-2">
                     <p class="text-primary fw-bold my-2">Создать новость: </p>
-                    <small class="text-center">
-                      <form action="{% url 'news' %}" method="POST">
-                        {% csrf_token %}
-                        {{ form.advisor | as_crispy_field }}
-                        <button class="btn w-50 btn-sm btn-outline-success" type="submit" name="create">Создать запрос</button>
-                      </form>
+                    <small class="small">
+                      <form action="{% url 'news' %}" method="POST" class=" p-4 p-md-5" novalidate>
+                            <small class="text-danger">
+                                {% if form.errors %}
+                                {{ form.errors.error }}
+                                {% endif %}
+                            </small>                                
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <span class="ml-5">
+                                <button class="btn btn-sm w-50 btn-outline-success" type="submit">Опубликовать</button>
+                            <span>
+                            <hr class="my-4">   
+                    </form>
                     </small>
-                  </div>
+                    <p class="text-primary fw-bold my-2">Опубликоыванные новости: </p>
+                        {% for n in news %}
+                          {% for a in advisor %}
+                            {% if user.id == a.user_id %}
+                              {% if a.pk == n.advisor_id %}
+                                <div class="border border-primary border-1 rounded-3 mt-3 mb-3 p-3">
+                                  <h5 class="fw-bold">{{ n.title }}</h5>
+                                  <hr class="mt-2 mb-2">
+                                  <p>{{ n.text }}</p>
+                                  <hr class="mt-2 mb-2">                                
+                                  <p class="small text-right text-secondary">Дата публикации: {{ n.date_of_pub }}</p>
+                                </div>
+                              </tr>
+                              {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        {% endfor %}
                 </div>
 {% endblock %}
