@@ -4,6 +4,7 @@ from urllib import request
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from app_users.models import *
+from app_calendars.models import *
 from .models import *
 from .forms import *
 import datetime
@@ -138,6 +139,43 @@ def dis(request):
             count_r = 41 - count_r
             return count_r
         
+        calend = Ac_years.objects.all()
+        today = datetime.date.today()
+        
+        for c in calend:
+            def m1():
+                if c.pk == 2:
+                    if today > c.m1_s and today < c.m1_e:
+                        return True
+                    else:
+                        return False
+            def m2():
+                if c.pk == 2:
+                    if today > c.m2_s and today < c.m2_e:
+                        return True
+                    else:
+                        return False
+            def m3():
+                if c.pk == 2:
+                    if today > c.m3_s and today < c.m3_e:
+                        return True
+                    else:
+                        return False
+            def m4():
+                if c.pk == 2:
+                    if today > c.m4_s and today < c.m4_e:
+                        return True
+                    else:
+                        return False
+                    
+            def is_i():
+                    if c.pk == 2:
+                        if today > c.i1_s and today < c.i1_e:
+                            return True
+                        elif today > c.i2_s and today < c.i2_e:
+                            return True
+                        else:
+                            return False
         
         context = {
             'users': user,
@@ -153,6 +191,13 @@ def dis(request):
             'cr': credit_counting_req(),
             'co': credit_ost(),
             'form': form,
+            'm1': m1(),
+            'm2': m2(),
+            'm3': m3(),
+            'm4': m4(),
+            'is_i': is_i(),
+            'calend': calend,
+            'today': today
         }
         
         def disc_filter():

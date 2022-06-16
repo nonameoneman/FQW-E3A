@@ -81,6 +81,7 @@ class Discipline_reg(models.Model):
     academ_c = models.BooleanField(("Подтверждение советника"), default=False)
     academ_a = models.BooleanField(("Отказ советника"), default=False)
     hide = models.BooleanField(("Скрыть результат"), default=False)
+    course = models.IntegerField(("Курс"), null=True)
     
     @property
     def student_name(self):

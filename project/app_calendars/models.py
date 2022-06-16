@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.forms import CharField
+from datetime import date
 
 # Create your models here.
 
@@ -24,6 +25,7 @@ class Ac_years(models.Model):
     fx2_e = models.DateField(("Конец FX (лет.)"), auto_now=False, auto_now_add=False, null=True)
     i2_s = models.DateField(("Начало I (лет.)"), auto_now=False, auto_now_add=False, null=True)
     i2_e = models.DateField(("Конец I (лет.)"), auto_now=False, auto_now_add=False, null=True)
+    
     
     def __str__(self):
         return self.name

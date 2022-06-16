@@ -13,11 +13,22 @@
                 <hr>
                 <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
                   <p class="text-primary fw-bold my-2">Анализ регистрации:</p>
+                  {% for s in student %}
+                    {% if s.user_id == user.id %}
+                      {% for d in dis %}
+                        {% if s.groups.department_id == d.department_id %}
+                          {{d.name}}<br>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
                   <p> Зарегистрированно кредитов: <span class="fw-bold">{{cf}}</span></p>
                   <p> Всего кредитов <small class="text-secondary">(с учетом запросов)</small>: <span class="fw-bold"> {{cr}} </span></p>
                   <p> Доступно к регистрации <small class="text-secondary">(с учетом запросов)</small>: <span class="fw-bold">{{co}}</span></p>
                   <hr class="mt-4 mb-4">
-                  <p class="text-primary fw-bold my-2">Создание запросов:</p>
+                  <p class="text-primary fw-bold my-2">Создание запросов:
+                  <p>{{today}}</p>
+                  </p>
                 <form action="{% url 'dis' %}" method="post" class="containet-sm px-5" novalidate>
                   <span class="mt-3 mb-3">
                         {% if submitted %}
@@ -82,4 +93,5 @@
                     </small>
                   <a href="{% url 'ac_conf' %}" class="btn btn-sm btn-outline-primary m-4 fw-bold">Страница отправки академ-советнику <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+
 {% endblock %}
