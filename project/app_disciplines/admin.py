@@ -14,10 +14,10 @@ class FormControlsAdmin(admin.ModelAdmin):
 class DisciplinesAdmin(admin.ModelAdmin):
     model = Disciplines
     
-    list_display = ('name', 'short_name', 'credits', 'hours', 'form_control', 'teacher', 'fh', 'sh', 'xtr', 'department')
+    list_display = ('name', 'short_name', 'credits', 'hours', 'form_control', 'teacher', 'fh', 'sh', 'xtr', 'department', 'course')
     search_field = ('name', 'short_name')
     list_filter = ('credits', 'hours', 'form_control')
-    list_editable = ('department', 'teacher', 'fh', 'sh', 'xtr')
+    list_editable = ('department', 'teacher', 'fh', 'sh', 'xtr', 'course')
     
 @admin.register(Discipline_reg)
 class DisciplineRegAdmin(admin.ModelAdmin):

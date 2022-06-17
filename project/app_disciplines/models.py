@@ -57,6 +57,7 @@ class Disciplines(models.Model):
     fh = models.BooleanField(("Первое полугодие"), null=True)
     sh = models.BooleanField(("Второе полугодие"), null=True)
     xtr = models.BooleanField(("Дополнительно"), null=True)
+    course = models.IntegerField(("Курс"), null=True)
     
     def __str__(self):
         return self.name
@@ -69,7 +70,7 @@ class Disciplines(models.Model):
     class Meta:
         verbose_name = 'Дисциплину'
         verbose_name_plural = '4. Дисциплины'
-        ordering = ['name', ] 
+        ordering = ['course', 'department' ] 
 
 class Discipline_reg(models.Model):
     discipline = models.ForeignKey("Disciplines", verbose_name=("Название дисциплины"), related_name='groups', on_delete=models.PROTECT)
@@ -81,7 +82,6 @@ class Discipline_reg(models.Model):
     academ_c = models.BooleanField(("Подтверждение советника"), default=False)
     academ_a = models.BooleanField(("Отказ советника"), default=False)
     hide = models.BooleanField(("Скрыть результат"), default=False)
-    course = models.IntegerField(("Курс"), null=True)
     
     @property
     def student_name(self):

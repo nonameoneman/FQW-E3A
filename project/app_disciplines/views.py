@@ -136,7 +136,7 @@ def dis(request):
             count_r = 0
             for a in all_data_r:
                 count_r = count_r + a
-            count_r = 41 - count_r
+            count_r = 128 - count_r
             return count_r
         
         calend = Ac_years.objects.all()
