@@ -1,5 +1,6 @@
 from django.urls import path, include
 from app_disciplines import views
+from wkhtmltopdf.views import PDFTemplateView
 
 
 urlpatterns = [

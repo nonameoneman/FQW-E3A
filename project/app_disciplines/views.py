@@ -1,6 +1,6 @@
 from itertools import count
 from turtle import end_fill
-from urllib import request
+from urllib import request, response
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from app_users.models import *
@@ -8,7 +8,6 @@ from app_calendars.models import *
 from .models import *
 from .forms import *
 import datetime
-
       
 def dis(request):
     user = User.objects.all()
@@ -298,17 +297,7 @@ def reg_list(request):
         return redirect('my_redirect')
     elif request.user.is_staff == True: 
         return redirect('my_redirect')   
-    else:
-        if request.method == "POST":
-            if 'academ' in request.POST:
-                academ_list = request.POST.getlist('send')
-                for snd in academ_list:
-                    dis_reg.filter(pk=int(snd)).update(send=True)
-            elif 'clear' in request.POST:
-                clear_list = request.POST.getlist('hide')
-                for clr in clear_list:
-                    dis_reg.filter(pk=int(clr)).update(hide=True)
-                    
+    else:                  
         date = datetime.date.today()
         
         context = {
@@ -320,6 +309,7 @@ def reg_list(request):
             'teacher': teacher,
             'dis': dis,
             'dis_reg': dis_reg,
+            'date': date,
             'title': 'Регистрация на предметы',
         }
 

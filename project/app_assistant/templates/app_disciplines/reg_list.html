@@ -7,31 +7,59 @@
 <html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% progressive_web_app_meta %}
     <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}">
     <link rel="stylesheet" href="{% static 'font-awesome/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <title>E3A | {{ title }}</title>
+    <style>
+        .container{
+            width:960px !important;
+        }
+        .photo_canvas{
+            width: 2480px !important;
+            height: 3508px !important;
+            font-size: 30px;
+            padding: 80px !important;
+        }
+        h4{
+            font-size: 40px;
+        }
+    </style>
 </head>
 <body>
     {% if user.is_authenticated %}
-                <div class="m-5 mt-1">
-                  <h4 class="text-center">Регистрационный лист</h4>
-                  <hr class="text-$gray-100">
+    <div class="m-3 mt-0 pt-0">
+        <button onclick="screenshot()" class="btn btn-sm btn-outline-light border-danger text-dark">Загрузить PDF файл | <i class="fa-solid fa-arrow-down text-danger"></i> <i class="fa-solid fa-file-pdf text-danger"></i></button>
+        <br>
+        <br>
+        <a href="{% url 'my_redirect' %}" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-angles-left"></i> Главная</span></a>
+        </small>
+    </div>
+    <div id="photo" class="m-0 photo_canvas fw-bold p-3">
+                <div class="m-0 p-0">
+                  <br>
+                  <h4 class="text-center fw-bold">Регистрационный лист</h4>
+                  <br>
+                  <br>
+                  <hr class="text-dark">
                   {% for s in student %}
                   {% if user.id == s.user_id %}
+                  <br>
                   <p class="fst-italic  text-secondary">Факультет :
                   <span class="fw-bold">{{ s.groups.department.faculty }}</p>
+                    <br>
                   <p class="fst-italic  text-secondary">Кафедра :
                   <span class="fw-bold">{{ s.groups.department }}</p>
-                  <hr class="text-$gray-100">
+                <br>
+                  <hr class="text-dark">
                 </tr>
                             <table class="table border-light "> <!-- Все стденты -->
                               <tbody>
                                 <tr>
                                   <th><span class="fst-italic small text-secondary">Шифр :</span></th>
                                   <td>{{ s.cipher }}</td>
+                                  
                                 </tr>
                                 <tr>
                                    <th><span class="fst-italic small text-secondary">ФИО :</span></th> 
@@ -49,15 +77,18 @@
                             </table>
                   {% endif %}
                 {% endfor %}
+                <br>
+                <hr class="text-dark">
+                <br>
                             <small class="text-center">
-                            <table class="table table-striped table-bordered border-light"> <!-- Все стденты -->
+                            <table class="table table-bordered border-secondary small_text"> <!-- Все стденты -->
                                 <thead>
                                 <tr>
                                     <th scope="col">Дисциплина</th>
                                     <th scope="col">Форма контроля</th>
                                     <th scope="col">Кол-во кредитов</th>
                                     <th scope="col">Кол-во часов</th>
-                                    <th scope="col">Статус</th>
+                                    <th scope="col">Преподаватель</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -68,7 +99,13 @@
                                         {% if dr.conf == True and dr.send == True%}
                                         <tr>
                                             {% if dr.hide != True %}
-                                            <th scope="row">{{ dr.discipline }}</th>
+                                            <th scope="row">
+                                                {{ dr.discipline }}
+                                                <br>
+                                                <span class="text-decoration-none text-primary small">E3A : 
+                                                <br> 
+                                                ID Регистрации [{{dr.id}}] | ID Дисциплины [{{dr.discipline_id}}]</span></span>
+                                            </th>
                                             <td>{{ dr.discipline.form_control }}</td>
                                             <td>{{ dr.discipline.credits }}</td>
                                             <td>{{ dr.discipline.hours }}</td>
@@ -76,7 +113,7 @@
                                                 {{ dr.discipline.teacher }} :                                                
                                                 <u><span class="text-success small"><i class="fa-solid fa-check"></i> <span class="fw-bold">Подтверждено</span></u>  
                                                     <br> 
-                                                    <span class="text-primary small">E3A : Дисциплина [{{dr.discipline_id}}] | Преподаватель [{{dr.discipline.teacher_id}}]</span></span>
+                                                    <span class="text-primary small">E3A : ID Преподавателя [{{dr.discipline.teacher_id}}]</span></span>
                                             </td>
                                             {% endif %}
                                         </tr>
@@ -87,32 +124,47 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+                            <br>
                             {% for s in student %}
                             {% if user.id == s.user_id %}
                                     {{ s.advisor }}:
                                     <u><span class="text-success fw-bold small"><i class="fa-solid fa-check"></i> Подтверждено</span></u>
                                     <br>
-                                    <span class="text-primary small">E3A : Советник [{{s.groups.advisor_id}}]</span>
+                                    <span class="text-primary small">E3A : ID Советника [{{s.groups.advisor_id}}]</span>
+                                <br>
+                                <br>
                                 <hr class="mt-1 mb-1">
+                                <br>
                                 {{date}}
                                 <br>
                                 {{s.user}}: ____________________<span class="small text-secondary fst-italic">(подпись)</span>
                             {% endif %}
                             {% endfor %}
-                            
-                            <br>
-                            <br>
-                            <button class="btn btn-sm btn-outline-light border-secondary text-dark" type="submit" name="download">Загрузить PDF документ | <i class="fa-solid fa-arrow-down text-danger"></i> <i class="fa-solid fa-file-pdf text-danger"></i></button>
-                            <br>
-                            <br>
-                            <a href="{% url 'my_redirect' %}" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-angles-left"></i> Главная</span></a>
-                            </small>
-    
-                        </form>
-                    </div>
+                        </div>
+    </div>
     {% else %}
       <a href="{% url 'login' %}">Авторизоваться</a>
       {% endif %}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script>
+        function screenshot(){
+            window.jsPDF = window.jspdf.jsPDF;
+            window.devicePixelRatio
+            html2canvas(document.getElementById('photo'), {
+                scale: 2,
+                onrendered: screenshot
+                }).then(function(canvas) {
+                    document.body.appendChild(canvas);
+                    var doc = new jsPDF("p", "mm", "a4");
+                    var width = doc.internal.pageSize.getWidth();
+                    var height = doc.internal.pageSize.getHeight();
+                    var imgdata = canvas.toDataURL("image/jpeg");
+                    doc.addImage(imgdata, 'JPEG', 0, 0, width, height);
+                    doc.save("E3A_reg_list.pdf");
+                });
+        }
+      </script>
       <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
       <script src="{% static 'js/offcanvas.js' %}"></script>
   </body>
