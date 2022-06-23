@@ -5,3 +5,10 @@ venv/Scripts/activate.bat
 venv/pyvenv.cfg
 venv/Scripts/activate
 venv/Scripts/activate.bat
+venv/Scripts/django-admin.py
+venv/Scripts/futurize-script.py
+venv/Scripts/pasteurize-script.py
+venv/Scripts/qr-script.py
+venv/Scripts/svg2pdf
+venv/Scripts/activate
+venv/pyvenv.cfg
