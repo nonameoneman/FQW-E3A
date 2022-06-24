@@ -27,9 +27,15 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'news' %}"><i class="fa-regular fa-newspaper"></i> Новости</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'dis' %}"><i class="fa-solid fa-file-import"></i> Регистрация на дисциплины</a>
-              </li>
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-book"></i> Регистрация на дисциплины</a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                    <li><a class="dropdown-item" href="{% url 'dis' %}"><i class="fa-solid fa-file-import"></i> Регистрация на предметы</a></li>
+                    <li><a class="dropdown-item" href="{% url 'ac_conf' %}"><i class="fa-solid fa-rectangle-list"></i> Формирование регистрационного листа</a></li>
+                  </ul>
+                </li>
+              </ul>
             </ul>
             <ul class="navbar-nav float-right">
               <li class="nav-item dropdown">

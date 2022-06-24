@@ -78,30 +78,32 @@
                             {% if s.user_id == user.id %}
                               {% for dr in dis_reg %}
                                 {% if s.id == dr.student_id %}
-                                {% if dr.conf == True %}
-                                  <tr>
-                                    <th scope="row">{{ dr.discipline }}</th>
-                                    <td>{{ dr.discipline.form_control }}</td>
-                                    <td>{{ dr.discipline.credits }}</td>
-                                    <td>{{ dr.discipline.hours }}</td>
-                                    <td>
-                                      {% if dr.hide == False %}
-                                          {% if dr.academ_c == True %}
-                                            <span class="text-success fw-bold">Подтверждено советником</span>
-                                          {% elif dr.academ_a == True %}
-                                            <span class="text-danger fw-bold">Отказано советником</span>
-                                          {% else %}
-                                            <span class="text-primary fw-bold">Запрос поступил советнику</span>
-                                          {% endif %}
-                                      {% elif dr.hide == True%}
-                                          {% if dr.academ_c == True %}
-                                            <span class="text-success fw-bold">Подтверждено деканатом</span>
-                                          {% endif %}  
-                                      {% endif %}
-                                    </td>
-                                    <td>{{ dr.date_of_reg}}</td>
-                                  </tr>
-                                {% endif %}
+                                  {% if dr.conf == True %}
+                                    <tr>
+                                      <th scope="row">{{ dr.discipline }}</th>
+                                      <td>{{ dr.discipline.form_control }}</td>
+                                      <td>{{ dr.discipline.credits }}</td>
+                                      <td>{{ dr.discipline.hours }}</td>
+                                      <td>
+                                        {% if dr.hide != True %}
+                                            {% if dr.academ_c == True %}
+                                              <span class="text-success fw-bold">Подтверждено советником</span>
+                                            {% elif dr.academ_a == True %}
+                                              <span class="text-danger fw-bold">Отказано советником</span>
+                                            {% elif dr.send == True %}
+                                              <span class="text-primary fw-bold">Запрос поступил советнику</span>
+                                            {% else %}
+                                              <span class="text-primary fw-bold">Ожидается окончание регистрации</span>
+                                            {% endif %}
+                                        {% elif dr.hide == True%}
+                                            {% if dr.academ_c == True %}
+                                              <span class="text-success fw-bold">Подтверждено деканатом</span>
+                                            {% endif %}  
+                                        {% endif %}
+                                      </td>
+                                      <td>{{ dr.date_of_reg}}</td>
+                                    </tr>
+                                  {% endif %}
                                 {% endif %}
                               {% endfor %}
                             {% endif %}

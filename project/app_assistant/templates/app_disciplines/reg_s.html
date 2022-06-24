@@ -187,6 +187,7 @@
                             {% if s.user_id == user.id %}
                               {% for dr in dis_reg %}
                                 {% if s.id == dr.student_id %}
+                                  {% if d.hide != True %}
                                   <tr>
                                     <th scope="row">{{ dr.discipline }}</th>
                                     <td>{{ dr.discipline.form_control }}</td>
@@ -209,6 +210,7 @@
                                     </td>
                                     <td>{{ dr.date_of_reg}}</td>
                                   </tr>
+                                  {% endif %}
                                 {% endif %}
                               {% endfor %}
                             {% endif %}
