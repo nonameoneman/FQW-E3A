@@ -116,14 +116,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # настраиваю PWA расширение
-PWA_APP_NAME = 'E3A' 
-PWA_APP_DESCRIPTION = "Электронный Ассистент" 
+PWA_APP_NAME = 'E3A | Electronic Assistant Of Academic Advisor' 
+PWA_APP_DESCRIPTION = "Электронный Ассистент Академического Советника" 
 PWA_APP_THEME_COLOR = '#0A0302' 
 PWA_APP_BACKGROUND_COLOR = '#ffffff' 
 PWA_APP_DISPLAY = 'standalone' 
 PWA_APP_SCOPE = '/' 
-PWA_APP_ORIENTATION = 'portrait' 
-PWA_APP_START_URL = '/login/' 
+PWA_APP_ORIENTATION = 'any' 
+PWA_APP_START_URL = '/assistant/' 
 PWA_APP_STATUS_BAR_COLOR = 'default' 
 PWA_APP_ICONS = [ { 'src': '/static/android-chrome-512x512.png', 'sizes': '512x512' } ] 
 PWA_APP_ICONS_APPLE = [ { 'src': '/static/apple-touch-icon.png', 'sizes': '180x180' } ] 

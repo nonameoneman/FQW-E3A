@@ -1,12 +1,13 @@
 from wsgiref.util import request_uri
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from app_users.models import User, Advisor, Groups, Student, Teacher
 from app_calendars.models import Ac_years
 from app_disciplines.models import Disciplines, Discipline_reg
     
 def my_redirect(request):
     if request.user.is_authenticated == False:
-        return redirect('login/')
+        return redirect('/login/')
     
     elif request.user.is_advisor == True:
         user = User.objects.all()

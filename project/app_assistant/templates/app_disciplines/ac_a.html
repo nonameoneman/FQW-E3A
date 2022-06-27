@@ -12,73 +12,74 @@
 {% block body %}
                 <hr>
                 <div class="container-lg bg-light rounded g-lg-10 me-auto px-3 py-1">
-                  <p class="text-primary fw-bold my-2">Листы на подпись:</p>
-                    <form action="" method="POST">
-                    {% csrf_token %}
-                        <small class="text-center">
-                        <table class="table table-striped table-bordered border-$gray-500"> <!-- Все стденты -->
-                            <thead>
-                            <tr>
-                                <th scope="col">Студент</th>
-                                <th scope="col">Дисциплина</th>
-                                <th scope="col">Преподаватель</th>
-                                <th scope="col">Действие</th>
-                            </tr>
-                            </thead>
-                            <tbody>      
-                            {% for a in advisor %}
-                                {% if a.user_id == user.id %}
-                                    {% for g in groups %}
-                                        {% if a.id == g.advisor_id %}
-                                            {% for s in student %}
-                                                {% if g.id == s.groups_id %}
-                                                    {% for dr in dis_reg %}
-                                                        {% if s.id == dr.student_id %}
-                                                            {% if dr.send == True %}
-                                                                {% if dr.hide != True %}
-                                                                <tr>
-                                                                    <th>{{ dr.student.name }}, {{ dr.student.groups.name }}</th>
-                                                                    <td>{{ dr.discipline }}</td>
-                                                                    <td>{{ dr.discipline.teacher.name }}
-                                                                        {% if dr.conf == True %}
-                                                                        <hr class="mt-1 mb-1">
-                                                                        <span class="text-success small">Подтверждено преподавателем</span>
-                                                                        {% endif %}
-                                                                    </td>
-                                                                    <td>
-                                                                        {% if dr.hide == False %}
-                                                                            {% if dr.academ_c == True %}
-                                                                                <span class="text-success fw-bold"><i class="fa-solid fa-check"></i> Подтверждено</span>
-                                                                            {% elif dr.academ_a == True %}                                                                    
-                                                                                <span class="text-danger fw-bold"><i class="fa-solid fa-xmark"></i> Отказано</span>
-                                                                            {% else %}
-                                                                                <div class="form-check">
-                                                                                    <input class="form-check-input" type="checkbox" value="{{dr.id}}" name="cnf"><span class="text-success fw-bold">Подтвердить</span>
-                                                                                </div>
-                                                                                <hr class="mt-1 mb-1">
-                                                                                <div class="form-check">
-                                                                                    <input class="form-check-input" type="checkbox" value="{{dr.id}}" name="abn"><span class="text-danger fw-bold">Отказать</span>
-                                                                                </div> 
+                    <div class="overflow-auto">
+                    <p class="text-primary fw-bold my-2">Листы на подпись:</p>
+                        <form action="" method="POST">
+                        {% csrf_token %}
+                            <small class="text-center">
+                            <table class="table table-striped table-bordered border-$gray-500"> <!-- Все стденты -->
+                                <thead>
+                                <tr>
+                                    <th scope="col">Студент</th>
+                                    <th scope="col">Дисциплина</th>
+                                    <th scope="col">Преподаватель</th>
+                                    <th scope="col">Действие</th>
+                                </tr>
+                                </thead>
+                                <tbody>      
+                                {% for a in advisor %}
+                                    {% if a.user_id == user.id %}
+                                        {% for g in groups %}
+                                            {% if a.id == g.advisor_id %}
+                                                {% for s in student %}
+                                                    {% if g.id == s.groups_id %}
+                                                        {% for dr in dis_reg %}
+                                                            {% if s.id == dr.student_id %}
+                                                                {% if dr.send == True %}
+                                                                    {% if dr.hide != True %}
+                                                                    <tr>
+                                                                        <th>{{ dr.student.name }}, {{ dr.student.groups.name }}</th>
+                                                                        <td>{{ dr.discipline }}</td>
+                                                                        <td>{{ dr.discipline.teacher.name }}
+                                                                            {% if dr.conf == True %}
+                                                                            <hr class="mt-1 mb-1">
+                                                                            <span class="text-success small">Подтверждено преподавателем</span>
                                                                             {% endif %}
-                                                                        {% endif %}
-                                                                    </td>
-                                                                </tr>
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if dr.hide == False %}
+                                                                                {% if dr.academ_c == True %}
+                                                                                    <span class="text-success fw-bold"><i class="fa-solid fa-check"></i> Подтверждено</span>
+                                                                                {% elif dr.academ_a == True %}                                                                    
+                                                                                    <span class="text-danger fw-bold"><i class="fa-solid fa-xmark"></i> Отказано</span>
+                                                                                {% else %}
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="checkbox" value="{{dr.id}}" name="cnf"><span class="text-success fw-bold">Подтвердить</span>
+                                                                                    </div>
+                                                                                    <hr class="mt-1 mb-1">
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="checkbox" value="{{dr.id}}" name="abn"><span class="text-danger fw-bold">Отказать</span>
+                                                                                    </div> 
+                                                                                {% endif %}
+                                                                            {% endif %}
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endif %}
                                                                 {% endif %}
                                                             {% endif %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}                                        
-                                    {% endfor %}
-                                {% endif %}
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <button class="btn w-50 btn-sm btn-outline-success m-4" type="submit" name="ac_choice">Вернуть выбранные значения студентам</button>
-                        </small>    
-                        </form>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}                                        
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <button class="btn w-50 btn-sm btn-outline-success m-4" type="submit" name="ac_choice">Вернуть выбранные значения студентам</button>
+                            </small>    
+                            </form>
 
-                    
+                        </div>
                     </div>
     {% endblock %}
