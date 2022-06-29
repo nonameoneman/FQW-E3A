@@ -82,6 +82,8 @@ class Discipline_reg(models.Model):
     academ_c = models.BooleanField(("Подтверждение советника"), default=False)
     academ_a = models.BooleanField(("Отказ советника"), default=False)
     hide = models.BooleanField(("Скрыть результат"), default=False)
+    good = models.BooleanField(("Закрыт"), default=False)
+    bad = models.BooleanField(("Не закрыт"), default=False)
     
     @property
     def student_name(self):
